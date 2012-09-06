@@ -1,0 +1,66 @@
+#######################################################################
+#
+# This is the main Nginx configuration file.  
+#
+# More information about the configuration options is available on 
+#   * the English wiki - http://wiki.nginx.org/Main
+#   * the Russian documentation - http://sysoev.ru/nginx/
+#
+#######################################################################
+
+#----------------------------------------------------------------------
+# Main Module - directives that cover basic functionality
+#
+#   http://wiki.nginx.org/NginxHttpMainModule
+#
+#----------------------------------------------------------------------
+
+user              <%= scope.lookupvar('nginx::daemon_user') %>;
+worker_processes  <%= scope.lookupvar('nginx::worker_processes') %>;
+
+error_log  <%= scope.lookupvar('nginx::logdir') %>/error.log;
+#error_log <%= scope.lookupvar('nginx::logdir') %>/error.log notice;
+#error_log <%= scope.lookupvar('nginx::logdir') %>/error.log info;
+
+pid        <%= scope.lookupvar('nginx::pidfile') %>;
+
+
+#----------------------------------------------------------------------
+# Events Module 
+#
+#   http://wiki.nginx.org/NginxHttpEventsModule
+#
+#----------------------------------------------------------------------
+
+events {
+    worker_connections <%= scope.lookupvar('nginx::worker_connections') %>;
+}
+
+
+#----------------------------------------------------------------------
+# HTTP Core Module
+#
+#   http://wiki.nginx.org/NginxHttpCoreModule 
+#
+#----------------------------------------------------------------------
+
+http {
+    include       <%= scope.lookupvar('nginx::mime_types') %>;
+    default_type  <%= scope.lookupvar('nginx::default_type') %>;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log        <%= scope.lookupvar('nginx::logdir') %>/access.log main;
+    sendfile          <%= scope.lookupvar('nginx::sendfile') %>;
+    tcp_nopush        <%= scope.lookupvar('nginx::tcp_nopush') %>;
+    tcp_nodelay       <%= scope.lookupvar('nginx::tcp_nodelay') %>;
+    keepalive_timeout <%= scope.lookupvar('nginx::keepalive_timeout') %>;
+    gzip              <%= scope.lookupvar('nginx::gzip') %>;
+    
+    # Load config files from the /etc/nginx/conf.d directory
+    # The default server is in conf.d/default.conf
+    include /etc/nginx/conf.d/*.conf;
+
+}
