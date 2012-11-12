@@ -21,6 +21,7 @@ class nginx::config {
           ensure => directory;
       }
     }
+
     default: {
       fail "Operatingsystem ${::operatingsystem} is not supported."
     }
