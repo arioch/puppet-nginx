@@ -1,10 +1,33 @@
 # = Class nginx::config
 class nginx::config {
+  File {
+    require => Class['nginx::install'],
+    notify  => Service[$nginx::service_name],
+  }
+
+  case $::operatingsystem {
+    'RedHat', 'CentOS': {
+      file { $nginx::vhostdir:
+        ensure => directory;
+      }
+    }
+
+    'Debian', 'Ubuntu': {
+      file {
+        $vhostdir_enabled:
+          ensure => directory;
+
+        $vhostdir_available:
+          ensure => directory;
+      }
+    }
+    default: {
+      fail "Operatingsystem ${::operatingsystem} is not supported."
+    }
+  }
+
   file {
     $nginx::confdir:
-      ensure => directory;
-
-    $nginx::vhostdir:
       ensure => directory;
 
     "${nginx::confdir}/nginx.conf":
@@ -13,7 +36,5 @@ class nginx::config {
       owner   => $nginx::config_user,
       group   => $nginx::config_group,
       mode    => $nginx::config_mode,
-      require => Class['nginx::install'],
-      notify  => Class['nginx::service'];
   }
 }

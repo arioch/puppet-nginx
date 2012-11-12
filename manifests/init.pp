@@ -22,7 +22,9 @@ class nginx (
   $config_group       = $nginx::params::config_group,
   $config_mode        = $nginx::params::config_mode,
   $daemon_user        = $nginx::params::daemon_user,
-  $pidfile            = $nginx::params::pidfile
+  $pidfile            = $nginx::params::pidfile,
+  $vhostdir_enabled   = $nginx::params::vhostdir_enabled,
+  $vhostdir_available = $nginx::params::vhostdir_available
 ) inherits nginx::params {
 
   include nginx::install
@@ -32,4 +34,5 @@ class nginx (
   Class['nginx::install'] ->
   Class['nginx::config'] ->
   Class['nginx::service']
+
 }
