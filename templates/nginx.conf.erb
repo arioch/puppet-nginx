@@ -1,8 +1,8 @@
 user              <%= scope.lookupvar('nginx::daemon_user') %>;
 worker_processes  <%= scope.lookupvar('nginx::worker_processes') %>;
 
-error_log  <%= scope.lookupvar('nginx::logdir') %>/error.log;
-pid        <%= scope.lookupvar('nginx::pidfile') %>;
+error_log         <%= scope.lookupvar('nginx::logdir') %>/error.log;
+pid               <%= scope.lookupvar('nginx::pidfile') %>;
 
 events {
     worker_connections <%= scope.lookupvar('nginx::worker_connections') %>;
@@ -17,7 +17,7 @@ http {
     keepalive_timeout <%= scope.lookupvar('nginx::keepalive_timeout') %>;
     tcp_nodelay       <%= scope.lookupvar('nginx::tcp_nodelay') %>;
     gzip              <%= scope.lookupvar('nginx::gzip') %>;
-    gzip_disable "MSIE [1-6]\.(?!.*SV1)";
+    gzip_disable      "MSIE [1-6]\.(?!.*SV1)";
 
     server_names_hash_bucket_size 64;
 
