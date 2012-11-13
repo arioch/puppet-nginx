@@ -93,7 +93,6 @@ describe 'nginx' do
         let(:params) {
           {
             :logdir             => '_logdir_',
-            :default_type       => '_default_type_',
             :mime_types         => '_mime_types_',
             :worker_processes   => '001',
             :worker_connections => '002',
@@ -123,9 +122,6 @@ describe 'nginx' do
 
           should contain_file('_confdir_/nginx.conf') \
             .with_content(/user.*_daemon_user_/)
-
-          should contain_file('_confdir_/nginx.conf') \
-            .with_content(/default_type.*_default_type_/)
 
           should contain_file('_confdir_/nginx.conf') \
             .with_content(/error_log.*_logdir_/)
