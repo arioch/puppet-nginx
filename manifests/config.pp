@@ -14,10 +14,10 @@ class nginx::config {
 
     'Debian', 'Ubuntu': {
       file {
-        $vhostdir_enabled:
+        $::nginx::vhostdir_enabled:
           ensure => directory;
 
-        $vhostdir_available:
+        $::nginx::vhostdir_available:
           ensure => directory;
       }
     }
