@@ -1,5 +1,6 @@
 server {
-  listen      <%= scope.lookupvar('listen') %>;
+  <% listen.each do |port| %>listen <%= port %>;
+  <% end %>
   server_name <%= scope.lookupvar('server_name') -%>;
 
   location / {
@@ -16,3 +17,5 @@ server {
     client_body_buffer_size <%= scope.lookupvar('client_body_buffer_size') -%>;
   }
 }
+
+

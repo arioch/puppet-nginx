@@ -3,7 +3,7 @@ define nginx::vhost (
   $ensure      = present,
   $server_name = $name,
   $config_path = undef,
-  $listen      = '80'
+  $listen      = [ '80', '443' ]
 ) {
   File {
     owner   => $nginx::config_user,

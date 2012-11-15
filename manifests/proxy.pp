@@ -6,7 +6,7 @@ define nginx::proxy (
   $ensure                  = present,
   $enable                  = false,
   $server_name             = $name,
-  $listen                  = '80',
+  $listen                  = [ '80', '443' ],
   $client_body_buffer_size = '128k',
   $client_max_body_size    = '8m',
   $proxy_buffers           = '4 32k',
