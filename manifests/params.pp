@@ -5,7 +5,7 @@ class nginx::params {
   $logdir             = '/var/log/nginx'
   $default_type       = 'application/octet-stream'
   $mime_types         = '/etc/nginx/mime.types'
-  $worker_processes   = '1'
+  $worker_processes   = $::processorcount
   $worker_connections = '1024'
   $sendfile           = 'on'
   $keepalive_timeout  = '65'
