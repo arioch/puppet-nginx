@@ -1,2 +1,2 @@
     worker_connections <%= scope.lookupvar('nginx::worker_connections') %>;
-    # multi_accept on;
+    multi_accept       <%= scope.lookupvar('nginx::multi_accept') %>;

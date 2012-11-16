@@ -7,7 +7,7 @@
     gzip              <%= scope.lookupvar('nginx::gzip') %>;
     gzip_disable      "MSIE [1-6]\.(?!.*SV1)";
 
-    server_names_hash_bucket_size 64;
+    server_names_hash_bucket_size <%= scope.lookupvar('nginx::server_names_hash_bucket_size') %>;
 
     include /etc/nginx/conf.d/*.conf;
     include /etc/nginx/sites-enabled/*;
