@@ -7,6 +7,7 @@ class nginx::params {
 
   # nginx.conf
   $worker_connections = '1024'
+  $worker_priority    = '0'
 
   # HTTP module
   $default_type      = 'application/octet-stream'

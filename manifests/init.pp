@@ -26,6 +26,7 @@ class nginx (
   $vhostdir_available            = $nginx::params::vhostdir_available,
   $vhostdir_enabled              = $nginx::params::vhostdir_enabled,
   $worker_connections            = $nginx::params::worker_connections,
+  $worker_priority               = $nginx::params::worker_priority,
   $worker_processes              = $nginx::params::worker_processes
 ) inherits nginx::params {
 

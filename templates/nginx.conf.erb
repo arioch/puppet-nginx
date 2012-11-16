@@ -1,4 +1,5 @@
 user              <%= scope.lookupvar('nginx::daemon_user') %>;
+worker_priority   <%= scope.lookupvar('nginx::worker_priority') %>;
 worker_processes  <%= scope.lookupvar('nginx::worker_processes') %>;
 
 error_log         <%= scope.lookupvar('nginx::logdir') %>/error.log;
