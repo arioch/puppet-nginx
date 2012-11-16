@@ -10,6 +10,10 @@ define nginx::mail (
   $proxy          = 'on'
 ) {
 
+  if ! $::nginx::mail {
+    fail "NGinX mail support is not enabled."
+  }
+
   case $protocol {
     'imap':  {
       if ! $listen_port {

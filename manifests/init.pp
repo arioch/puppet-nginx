@@ -1,5 +1,7 @@
 # = Class nginx
 class nginx (
+  $http                          = $nginx::params::http,
+  $mail                          = $nginx::params::mail,
   $confdir                       = $nginx::params::confdir,
   $config_group                  = $nginx::params::config_group,
   $config_mode                   = $nginx::params::config_mode,

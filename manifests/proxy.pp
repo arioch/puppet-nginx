@@ -15,6 +15,10 @@ define nginx::proxy (
   $proxy_send_timeout      = '100'
 ) {
 
+  if ! $::nginx::http {
+    fail "NGinX http support is not enabled."
+  }
+
   File {
     owner   => $nginx::user,
     group   => $nginx::group,

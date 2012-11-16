@@ -4,6 +4,8 @@
 class nginx::params {
   # Generic parameters
   $logdir = '/var/log/nginx'
+  $http   = true
+  $mail   = false
 
   # nginx.conf
   $worker_connections = '1024'

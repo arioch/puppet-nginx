@@ -37,6 +37,7 @@ class nginx::config {
     mode  => $nginx::config_mode,
   }
 
+  # Default configuration
   concat::fragment { 'nginx.conf_header':
     target  => "${nginx::confdir}/nginx.conf",
     content => template('nginx/nginx.conf.erb'),
@@ -61,36 +62,43 @@ class nginx::config {
     order   => 10,
   }
 
-  concat::fragment { 'nginx.conf_body_http_header':
-    target  => "${nginx::confdir}/nginx.conf",
-    content => "http {\n",
-    order   => 11,
+  # HTTP module configuration
+  if $::nginx::http {
+    concat::fragment { 'nginx.conf_body_http_header':
+      target  => "${nginx::confdir}/nginx.conf",
+      content => "http {\n",
+      order   => 11,
+    }
+
+    concat::fragment { 'nginx.conf_body_http_content':
+      target  => "${nginx::confdir}/nginx.conf",
+      content => template('nginx/http.erb'),
+      order   => 12,
+    }
+
+    concat::fragment { 'nginx.conf_body_http_footer':
+      target  => "${nginx::confdir}/nginx.conf",
+      content => "}\n\n",
+      order   => 15,
+    }
   }
 
-  concat::fragment { 'nginx.conf_body_http_content':
-    target  => "${nginx::confdir}/nginx.conf",
-    content => template('nginx/http.erb'),
-    order   => 12,
+  # Mail module configuration
+  if $::nginx::mail {
+    concat::fragment { 'nginx.conf_body_mail_header':
+      target  => "${nginx::confdir}/nginx.conf",
+      content => template('nginx/mail_header.erb'),
+      order   => 16,
+    }
+
+    concat::fragment { 'nginx.conf_body_mail_footer':
+      target  => "${nginx::confdir}/nginx.conf",
+      content => "}\n\n",
+      order   => 20,
+    }
   }
 
-  concat::fragment { 'nginx.conf_body_http_footer':
-    target  => "${nginx::confdir}/nginx.conf",
-    content => "}\n\n",
-    order   => 15,
-  }
-
-  concat::fragment { 'nginx.conf_body_mail_header':
-    target  => "${nginx::confdir}/nginx.conf",
-    content => template('nginx/mail_header.erb'),
-    order   => 16,
-  }
-
-  concat::fragment { 'nginx.conf_body_mail_footer':
-    target  => "${nginx::confdir}/nginx.conf",
-    content => "}\n\n",
-    order   => 20,
-  }
-
+  # Close header
   concat::fragment { 'nginx.conf_footer':
     target  => "${nginx::confdir}/nginx.conf",
     content => "\n",

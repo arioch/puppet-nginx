@@ -8,6 +8,10 @@ define nginx::upstream (
   $upstream_backend = $name
 ) {
 
+  if ! $::nginx::http {
+    fail "NGinX http support is not enabled."
+  }
+
   concat::fragment { "nginx.conf_body_http_upstream_${name}":
     target  => "${nginx::confdir}/nginx.conf",
     content => template('nginx/upstream.erb'),

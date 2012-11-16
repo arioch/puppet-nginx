@@ -65,7 +65,7 @@
 
     node /frontend/ {
       class {
-        'nginx':;
+        'nginx': mail => true;
       }
     
       Nginx::Mail {
