@@ -1,0 +1,14 @@
+    include           <%= scope.lookupvar('nginx::mime_types') %>;
+    access_log        <%= scope.lookupvar('nginx::logdir') %>/access.log;
+    sendfile          <%= scope.lookupvar('nginx::sendfile') %>;
+    tcp_nopush        <%= scope.lookupvar('nginx::tcp_nopush') %>;
+    keepalive_timeout <%= scope.lookupvar('nginx::keepalive_timeout') %>;
+    tcp_nodelay       <%= scope.lookupvar('nginx::tcp_nodelay') %>;
+    gzip              <%= scope.lookupvar('nginx::gzip') %>;
+    gzip_disable      "MSIE [1-6]\.(?!.*SV1)";
+
+    server_names_hash_bucket_size 64;
+
+    include /etc/nginx/conf.d/*.conf;
+    include /etc/nginx/sites-enabled/*;
+

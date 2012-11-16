@@ -5,6 +5,10 @@ class nginx::config {
     notify  => Service[$nginx::service_name],
   }
 
+  file { $nginx::confdir:
+    ensure => directory;
+  }
+
   case $::operatingsystem {
     'RedHat', 'CentOS': {
       file { $nginx::vhostdir:
@@ -27,15 +31,77 @@ class nginx::config {
     }
   }
 
-  file {
-    $nginx::confdir:
-      ensure => directory;
-
-    "${nginx::confdir}/nginx.conf":
-      ensure  => present,
-      content => template('nginx/nginx.conf.erb'),
-      owner   => $nginx::config_user,
-      group   => $nginx::config_group,
-      mode    => $nginx::config_mode,
+  concat { "${nginx::confdir}/nginx.conf":
+    owner => $nginx::config_user,
+    group => $nginx::config_group,
+    mode  => $nginx::config_mode,
   }
+
+  concat::fragment { 'nginx.conf_header':
+    target  => "${nginx::confdir}/nginx.conf",
+    content => template('nginx/nginx.conf.erb'),
+    order   => 01,
+  }
+
+  concat::fragment { 'nginx.conf_body_events_header':
+    target  => "${nginx::confdir}/nginx.conf",
+    content => "events {\n",
+    order   => 06,
+  }
+
+  concat::fragment { "nginx.conf_body_events_content":
+    target  => "${nginx::confdir}/nginx.conf",
+    content => template('nginx/events.erb'),
+    order   => 07,
+  }
+
+  concat::fragment { 'nginx.conf_body_events_footer':
+    target  => "${nginx::confdir}/nginx.conf",
+    content => "}\n\n",
+    order   => 10,
+  }
+
+  concat::fragment { 'nginx.conf_body_http_header':
+    target  => "${nginx::confdir}/nginx.conf",
+    content => "http {\n",
+    order   => 11,
+  }
+
+  concat::fragment { "nginx.conf_body_http_content":
+    target  => "${nginx::confdir}/nginx.conf",
+    content => template('nginx/http.erb'),
+    order   => 12,
+  }
+
+  concat::fragment { 'nginx.conf_body_http_footer':
+    target  => "${nginx::confdir}/nginx.conf",
+    content => "}\n\n",
+    order   => 15,
+  }
+
+  concat::fragment { 'nginx.conf_body_mail_header':
+    target  => "${nginx::confdir}/nginx.conf",
+    content => "mail {\n",
+    order   => 16,
+  }
+
+  concat::fragment { 'nginx.conf_body_mail_content':
+    target  => "${nginx::confdir}/nginx.conf",
+    content => template('nginx/mail.erb'),
+    order   => 17,
+  }
+
+  concat::fragment { 'nginx.conf_body_mail_footer':
+    target  => "${nginx::confdir}/nginx.conf",
+    content => "}\n\n",
+    order   => 20,
+  }
+
+  concat::fragment { 'nginx.conf_footer':
+    target  => "${nginx::confdir}/nginx.conf",
+    content => "\n",
+    order   => 100,
+  }
+
 }
+
