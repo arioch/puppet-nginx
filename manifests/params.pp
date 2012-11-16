@@ -2,16 +2,26 @@
 #
 #
 class nginx::params {
-  $logdir             = '/var/log/nginx'
-  $default_type       = 'application/octet-stream'
-  $mime_types         = '/etc/nginx/mime.types'
-  $worker_processes   = $::processorcount
+  # Generic parameters
+  $logdir = '/var/log/nginx'
+
+  # nginx.conf
   $worker_connections = '1024'
-  $sendfile           = 'on'
-  $keepalive_timeout  = '65'
-  $tcp_nodelay        = 'on'
-  $gzip               = 'on'
-  $tcp_nopush         = 'off'
+
+  # HTTP module
+  $default_type      = 'application/octet-stream'
+  $gzip              = 'on'
+  $keepalive_timeout = '65'
+  $mime_types        = '/etc/nginx/mime.types'
+  $sendfile          = 'on'
+  $tcp_nodelay       = 'on'
+  $tcp_nopush        = 'off'
+
+  $server_names_hash_bucket_size = '64'
+
+  # Events module
+  $worker_processes = $::processorcount
+  $multi_accept     = 'off'
 
   case $::operatingsystem {
     'RedHat', 'CentOS': {
