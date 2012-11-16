@@ -9,7 +9,7 @@ define nginx::upstream (
 ) {
 
   if ! $::nginx::http {
-    fail "NGinX http support is not enabled."
+    fail 'NGinX http support is not enabled.'
   }
 
   concat::fragment { "nginx.conf_body_http_upstream_${name}":

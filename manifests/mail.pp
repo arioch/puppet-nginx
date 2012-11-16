@@ -11,7 +11,7 @@ define nginx::mail (
 ) {
 
   if ! $::nginx::mail {
-    fail "NGinX mail support is not enabled."
+    fail 'NGinX mail support is not enabled.'
   }
 
   case $protocol {

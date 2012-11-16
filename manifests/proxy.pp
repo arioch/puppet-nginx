@@ -16,7 +16,7 @@ define nginx::proxy (
 ) {
 
   if ! $::nginx::http {
-    fail "NGinX http support is not enabled."
+    fail 'NGinX http support is not enabled.'
   }
 
   File {
