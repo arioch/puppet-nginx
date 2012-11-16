@@ -81,14 +81,8 @@ class nginx::config {
 
   concat::fragment { 'nginx.conf_body_mail_header':
     target  => "${nginx::confdir}/nginx.conf",
-    content => "mail {\n",
+    content => template('nginx/mail_header.erb'),
     order   => 16,
-  }
-
-  concat::fragment { 'nginx.conf_body_mail_content':
-    target  => "${nginx::confdir}/nginx.conf",
-    content => template('nginx/mail.erb'),
-    order   => 17,
   }
 
   concat::fragment { 'nginx.conf_body_mail_footer':
