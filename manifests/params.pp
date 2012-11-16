@@ -37,7 +37,7 @@ class nginx::params {
       $config_mode        = '0644'
       $daemon_user        = 'nginx'
       $confdir            = '/etc/nginx'
-      $vhostdir           = '/etc/nginx/conf.d'
+      $vhostdir_enabled   = '/etc/nginx/conf.d'
       $pidfile            = '/var/run/nginx.pid'
     }
 

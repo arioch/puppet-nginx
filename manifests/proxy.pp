@@ -25,12 +25,12 @@ define nginx::proxy (
   case $::operatingsystem {
     'RedHat', 'CentOS': {
       if $enable {
-        file { "${::nginx::vhostdir}/${name}":
+        file { "${::nginx::vhostdir_enabled}/${name}":
           ensure  => $ensure,
           content => template ('nginx/proxy.erb');
         }
       } else {
-        file { "${::nginx::vhostdir}/${name}":
+        file { "${::nginx::vhostdir_enabled}/${name}":
           ensure  => $ensure,
           content => template ('nginx/proxy.erb');
         }

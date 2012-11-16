@@ -103,7 +103,8 @@ describe 'nginx' do
             :tcp_nopush         => '_tcp_nopush_',
             :daemon_user        => '_daemon_user_',
             :confdir            => '_confdir_',
-            :vhostdir           => '_vhostdir_',
+            :vhostdir_available => '_vhostdir_available',
+            :vhostdir_enabled   => '_vhostdir_enabled',
             :pidfile            => '_pidfile_',
             :config_user        => '_config_user_',
             :config_group       => '_config_group_'
@@ -155,6 +156,12 @@ describe 'nginx' do
 
           should contain_file('_confdir_/nginx.conf') \
             .with_content(/_pidfile_/)
+
+          should contain_file('_confdir_/nginx.conf') \
+            .with_content(/_vhostdir_enabled_/)
+
+          should contain_file('_confdir_/nginx.conf') \
+            .with_content(/_vhostdir_available_/)
         end
       end
     end

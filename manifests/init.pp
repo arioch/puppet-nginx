@@ -22,7 +22,6 @@ class nginx (
   $service_name                  = $nginx::params::service_name,
   $tcp_nodelay                   = $nginx::params::tcp_nodelay,
   $tcp_nopush                    = $nginx::params::tcp_nopush,
-  $vhostdir                      = $nginx::params::vhostdir,
   $vhostdir_available            = $nginx::params::vhostdir_available,
   $vhostdir_enabled              = $nginx::params::vhostdir_enabled,
   $worker_connections            = $nginx::params::worker_connections,

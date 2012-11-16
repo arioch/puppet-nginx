@@ -11,7 +11,7 @@ class nginx::config {
 
   case $::operatingsystem {
     'RedHat', 'CentOS': {
-      file { $nginx::vhostdir:
+      file { $::nginx::vhostdir_enabled:
         ensure => directory;
       }
     }

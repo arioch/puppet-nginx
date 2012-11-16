@@ -6,22 +6,22 @@ define nginx::vhost (
   $listen      = [ '80', '443' ]
 ) {
   File {
-    owner   => $nginx::config_user,
-    group   => $nginx::config_group,
+    owner   => $::nginx::config_user,
+    group   => $::nginx::config_group,
     require => Class['::nginx::config'],
-    notify  => Service[$nginx::service_name],
+    notify  => Service[$::nginx::service_name],
   }
 
   if ! $config_path {
     file {
-      "${nginx::vhostdir}/${name}.conf":
+      "${::nginx::vhostdir_enabled}/${name}.conf":
         ensure  => $ensure,
         content => template ('nginx/vhost.conf.erb');
 
     }
   } else {
     # config provided by application
-    file { "${nginx::vhostdir}/${name}.conf":
+    file { "${::nginx::vhostdir_enabled}/${name}.conf":
         ensure => link,
         target => $config_path,
       }
