@@ -49,7 +49,7 @@ class nginx::config {
     order   => 06,
   }
 
-  concat::fragment { "nginx.conf_body_events_content":
+  concat::fragment { 'nginx.conf_body_events_content':
     target  => "${nginx::confdir}/nginx.conf",
     content => template('nginx/events.erb'),
     order   => 07,
@@ -67,7 +67,7 @@ class nginx::config {
     order   => 11,
   }
 
-  concat::fragment { "nginx.conf_body_http_content":
+  concat::fragment { 'nginx.conf_body_http_content':
     target  => "${nginx::confdir}/nginx.conf",
     content => template('nginx/http.erb'),
     order   => 12,

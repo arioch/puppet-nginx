@@ -4,6 +4,7 @@
 define nginx::upstream (
   $upstream_nodes,
   $ensure           = present,
+  $ip_hash          = false,
   $upstream_backend = $name
 ) {
 
