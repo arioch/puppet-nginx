@@ -40,10 +40,10 @@ define nginx::mail (
     }
 
     'pop3s':  {
-      if ! $listen_protocol {
-        $_listen_protocol = 'pop3s'
+      if ! $listen_port {
+        $_listen_port = '995'
       } else {
-        $_listen_protocol = $listen_protocol
+        $_listen_port = $listen_port
       }
     }
 
