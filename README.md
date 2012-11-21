@@ -61,6 +61,23 @@
       }
     }
     
+### Load balancing with ip hashes (sticky connections)
+
+Sticky connections are useful for applications that rely on cookies or
+being served by the same backend node for different reasons.
+
+This is usually the case for PHP applications so it's enabled by default.
+
+    nginx::upstream { 'backend':
+      ip_hash        => true,
+      upstream_nodes => [
+        '10.0.1.1',
+        '10.0.1.2',
+        '10.0.1.3',
+        '10.0.1.4'
+      ];
+    }
+
 ### Mail proxy
 
     node /frontend/ {
