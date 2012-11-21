@@ -12,10 +12,12 @@ define nginx::upstream (
     fail 'NGinX http support is not enabled.'
   }
 
-  concat::fragment { "nginx.conf_body_http_upstream_${name}":
-    target  => "${nginx::confdir}/nginx.conf",
-    content => template('nginx/upstream.erb'),
-    order   => 14,
+  if $ensure == present {
+    concat::fragment { "nginx.conf_body_http_upstream_${name}":
+      target  => "${nginx::confdir}/nginx.conf",
+      content => template('nginx/upstream.erb'),
+      order   => 14,
+    }
   }
 
 }
