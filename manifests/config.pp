@@ -31,7 +31,7 @@ class nginx::config {
     }
   }
 
-  concat { "${nginx::config_dir}/nginx.conf":
+  concat { "${::nginx::config_dir}/nginx.conf":
     owner => $nginx::config_user,
     group => $nginx::config_group,
     mode  => $nginx::config_mode,
@@ -39,25 +39,25 @@ class nginx::config {
 
   # Default configuration
   concat::fragment { 'nginx.conf_header':
-    target  => "${nginx::config_dir}/nginx.conf",
+    target  => "${::nginx::config_dir}/nginx.conf",
     content => template('nginx/nginx.conf.erb'),
     order   => 01,
   }
 
   concat::fragment { 'nginx.conf_body_events_header':
-    target  => "${nginx::config_dir}/nginx.conf",
+    target  => "${::nginx::config_dir}/nginx.conf",
     content => "events {\n",
     order   => 06,
   }
 
   concat::fragment { 'nginx.conf_body_events_content':
-    target  => "${nginx::config_dir}/nginx.conf",
+    target  => "${::nginx::config_dir}/nginx.conf",
     content => template('nginx/events.erb'),
     order   => 07,
   }
 
   concat::fragment { 'nginx.conf_body_events_footer':
-    target  => "${nginx::config_dir}/nginx.conf",
+    target  => "${::nginx::config_dir}/nginx.conf",
     content => "}\n\n",
     order   => 10,
   }
@@ -65,19 +65,19 @@ class nginx::config {
   # HTTP module configuration
   if $::nginx::http {
     concat::fragment { 'nginx.conf_body_http_header':
-      target  => "${nginx::config_dir}/nginx.conf",
+      target  => "${::nginx::config_dir}/nginx.conf",
       content => "http {\n",
       order   => 11,
     }
 
     concat::fragment { 'nginx.conf_body_http_content':
-      target  => "${nginx::config_dir}/nginx.conf",
+      target  => "${::nginx::config_dir}/nginx.conf",
       content => template('nginx/http.erb'),
       order   => 12,
     }
 
     concat::fragment { 'nginx.conf_body_http_footer':
-      target  => "${nginx::config_dir}/nginx.conf",
+      target  => "${::nginx::config_dir}/nginx.conf",
       content => "}\n\n",
       order   => 15,
     }
@@ -86,13 +86,13 @@ class nginx::config {
   # Mail module configuration
   if $::nginx::mail {
     concat::fragment { 'nginx.conf_body_mail_header':
-      target  => "${nginx::config_dir}/nginx.conf",
+      target  => "${::nginx::config_dir}/nginx.conf",
       content => template('nginx/mail_header.erb'),
       order   => 16,
     }
 
     concat::fragment { 'nginx.conf_body_mail_footer':
-      target  => "${nginx::config_dir}/nginx.conf",
+      target  => "${::nginx::config_dir}/nginx.conf",
       content => "}\n\n",
       order   => 20,
     }
@@ -100,7 +100,7 @@ class nginx::config {
 
   # Close header
   concat::fragment { 'nginx.conf_footer':
-    target  => "${nginx::config_dir}/nginx.conf",
+    target  => "${::nginx::config_dir}/nginx.conf",
     content => "\n",
     order   => 100,
   }
