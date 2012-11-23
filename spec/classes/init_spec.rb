@@ -102,7 +102,7 @@ describe 'nginx' do
             :gzip               => '_gzip_',
             :tcp_nopush         => '_tcp_nopush_',
             :daemon_user        => '_daemon_user_',
-            :confdir            => '_confdir_',
+            :config_dir         => '_config_dir_',
             :vhostdir_available => '_vhostdir_available',
             :vhostdir_enabled   => '_vhostdir_enabled',
             :pidfile            => '_pidfile_',
@@ -112,55 +112,55 @@ describe 'nginx' do
         }
 
         it do
-          should contain_file('_confdir_/nginx.conf') \
+          should contain_file('_config_dir_/nginx.conf') \
             .with_owner('_config_user_')
 
-          should contain_file('_confdir_/nginx.conf') \
+          should contain_file('_config_dir_/nginx.conf') \
             .with_group('_config_group_')
 
-          should contain_file('_confdir_/nginx.conf') \
+          should contain_file('_config_dir_/nginx.conf') \
             .with_content(/user.*_daemon_user_/)
 
-          should contain_file('_confdir_/nginx.conf') \
+          should contain_file('_config_dir_/nginx.conf') \
             .with_content(/user.*_daemon_user_/)
 
-          should contain_file('_confdir_/nginx.conf') \
+          should contain_file('_config_dir_/nginx.conf') \
             .with_content(/error_log.*_logdir_/)
 
-          should contain_file('_confdir_/nginx.conf') \
+          should contain_file('_config_dir_/nginx.conf') \
             .with_content(/access_log.*_logdir_/)
 
-          should contain_file('_confdir_/nginx.conf') \
+          should contain_file('_config_dir_/nginx.conf') \
             .with_content(/include.*_mime_types_/)
 
-          should contain_file('_confdir_/nginx.conf') \
+          should contain_file('_config_dir_/nginx.conf') \
             .with_content(/worker_processes.*001/)
 
-          should contain_file('_confdir_/nginx.conf') \
+          should contain_file('_config_dir_/nginx.conf') \
             .with_content(/worker_connections.*002/)
 
-          should contain_file('_confdir_/nginx.conf') \
+          should contain_file('_config_dir_/nginx.conf') \
             .with_content(/sendfile.*_sendfile_/)
 
-          should contain_file('_confdir_/nginx.conf') \
+          should contain_file('_config_dir_/nginx.conf') \
             .with_content(/keepalive_timeout.*003/)
 
-          should contain_file('_confdir_/nginx.conf') \
+          should contain_file('_config_dir_/nginx.conf') \
             .with_content(/tcp_nodelay.*_tcp_nodelay_/)
 
-          should contain_file('_confdir_/nginx.conf') \
+          should contain_file('_config_dir_/nginx.conf') \
             .with_content(/gzip.*_gzip_/)
 
-          should contain_file('_confdir_/nginx.conf') \
+          should contain_file('_config_dir_/nginx.conf') \
             .with_content(/_tcp_nopush_/)
 
-          should contain_file('_confdir_/nginx.conf') \
+          should contain_file('_config_dir_/nginx.conf') \
             .with_content(/_pidfile_/)
 
-          should contain_file('_confdir_/nginx.conf') \
+          should contain_file('_config_dir_/nginx.conf') \
             .with_content(/_vhostdir_enabled_/)
 
-          should contain_file('_confdir_/nginx.conf') \
+          should contain_file('_config_dir_/nginx.conf') \
             .with_content(/_vhostdir_available_/)
         end
       end

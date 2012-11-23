@@ -66,7 +66,7 @@ define nginx::mail (
 
   if $ensure == present {
     concat::fragment { "nginx.conf_body_mail_${name}":
-      target  => "${nginx::confdir}/nginx.conf",
+      target  => "${nginx::config_dir}/nginx.conf",
       content => template('nginx/mail.erb'),
       order   => 18,
     }

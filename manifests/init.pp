@@ -2,7 +2,7 @@
 class nginx (
   $http                          = $nginx::params::http,
   $mail                          = $nginx::params::mail,
-  $confdir                       = $nginx::params::confdir,
+  $config_dir                    = $nginx::params::config_dir,
   $config_group                  = $nginx::params::config_group,
   $config_mode                   = $nginx::params::config_mode,
   $config_user                   = $nginx::params::config_user,
