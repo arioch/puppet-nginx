@@ -1,4 +1,4 @@
-# Define: nginx::proxy
+# Define: nginx::upstream
 # Parameters:
 #
 define nginx::upstream (
