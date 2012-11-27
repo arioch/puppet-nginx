@@ -32,9 +32,10 @@ class nginx::config {
   }
 
   concat { "${::nginx::config_dir}/nginx.conf":
-    owner => $nginx::config_user,
-    group => $nginx::config_group,
-    mode  => $nginx::config_mode,
+    owner  => $nginx::config_user,
+    group  => $nginx::config_group,
+    mode   => $nginx::config_mode,
+    notify => Service[$::nginx::service_name],
   }
 
   # Default configuration
