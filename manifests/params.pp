@@ -1,5 +1,4 @@
-# Class nginx::params
-#
+# = Class nginx::params
 #
 class nginx::params {
   # Generic parameters

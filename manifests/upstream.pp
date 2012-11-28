@@ -1,5 +1,4 @@
-# Define: nginx::upstream
-# Parameters:
+# = Define nginx::upstream
 #
 define nginx::upstream (
   $upstream_nodes,

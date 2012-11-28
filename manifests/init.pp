@@ -1,4 +1,5 @@
 # = Class nginx
+#
 class nginx (
   $http                          = $nginx::params::http,
   $mail                          = $nginx::params::mail,

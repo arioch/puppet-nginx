@@ -1,4 +1,5 @@
 # = Define nginx::vhost
+#
 define nginx::vhost (
   $ensure      = present,
   $server_name = $name,

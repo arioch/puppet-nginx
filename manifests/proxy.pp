@@ -1,5 +1,4 @@
-# Define: nginx::proxy
-# Parameters:
+# = Define nginx::proxy
 #
 define nginx::proxy (
   $proxy_pass,

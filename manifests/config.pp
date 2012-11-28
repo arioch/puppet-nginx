@@ -1,4 +1,5 @@
 # = Class nginx::config
+#
 class nginx::config {
   File {
     require => Class['nginx::install'],
