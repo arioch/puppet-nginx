@@ -10,6 +10,5 @@
 
     server_names_hash_bucket_size <%= scope.lookupvar('nginx::server_names_hash_bucket_size') %>;
 
-    include /etc/nginx/conf.d/*.conf;
-    include /etc/nginx/sites-enabled/*;
+    include <%= scope.lookupvar('nginx::vhostdir_enabled') %>/*;
 
