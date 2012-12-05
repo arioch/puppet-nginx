@@ -7,7 +7,7 @@ class nginx::params {
   $mail   = false
 
   # nginx.conf
-  $worker_connections = '1024'
+  $worker_connections = ( 1024 * $::processorcount )
   $worker_priority    = '0'
 
   # HTTP module
