@@ -32,12 +32,9 @@ class nginx (
   $worker_processes              = $nginx::params::worker_processes
 ) inherits nginx::params {
 
-  include nginx::install
-  include nginx::config
-  include nginx::service
-
-  Class['nginx::install'] ->
-  Class['nginx::config'] ->
-  Class['nginx::service']
+  class { 'nginx::install': } ->
+  class { 'nginx::config': } ~>
+  class { 'nginx::service': } ->
+  Class [ 'nginx' ]
 
 }
