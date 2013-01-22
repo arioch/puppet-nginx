@@ -1,8 +1,7 @@
 # = Class nginx
 #
 class nginx (
-  $http                          = $nginx::params::http,
-  $mail                          = $nginx::params::mail,
+  $accept_mutex                  = $nginx::params::accept_mutex,
   $config_dir                    = $nginx::params::config_dir,
   $config_group                  = $nginx::params::config_group,
   $config_mode                   = $nginx::params::config_mode,
@@ -10,8 +9,10 @@ class nginx (
   $daemon_user                   = $nginx::params::daemon_user,
   $default_type                  = $nginx::params::default_type,
   $gzip                          = $nginx::params::gzip,
+  $http                          = $nginx::params::http,
   $keepalive_timeout             = $nginx::params::keepalive_timeout,
   $logdir                        = $nginx::params::logdir,
+  $mail                          = $nginx::params::mail,
   $mime_types                    = $nginx::params::mime_types,
   $multi_accept                  = $nginx::params::multi_accept,
   $pidfile                       = $nginx::params::pidfile,

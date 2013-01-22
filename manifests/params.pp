@@ -2,8 +2,8 @@
 #
 class nginx::params {
   # Generic parameters
-  $logdir = '/var/log/nginx'
   $http   = true
+  $logdir = '/var/log/nginx'
   $mail   = false
 
   # nginx.conf
@@ -31,6 +31,7 @@ class nginx::params {
   # Events module
   $worker_processes = $::processorcount
   $multi_accept     = 'off'
+  $accept_mutex     = 'off'
 
   case $::operatingsystem {
     'RedHat', 'CentOS': {
