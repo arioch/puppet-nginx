@@ -20,6 +20,7 @@ class nginx::params {
   # HTTP module
   $default_type      = 'application/octet-stream'
   $gzip              = 'on'
+  $gzip_disable      = 'MSIE [1-6]\.(?!.*SV1)'
   $keepalive_timeout = '65'
   $mime_types        = '/etc/nginx/mime.types'
   $sendfile          = 'on'

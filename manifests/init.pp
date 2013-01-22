@@ -10,6 +10,7 @@ class nginx (
   $default_type                  = $nginx::params::default_type,
   $event_model                   = $nginx::params::event_model,
   $gzip                          = $nginx::params::gzip,
+  $gzip_disable                  = $nginx::params::gzip_disable,
   $http                          = $nginx::params::http,
   $keepalive_timeout             = $nginx::params::keepalive_timeout,
   $logdir                        = $nginx::params::logdir,
