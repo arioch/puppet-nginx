@@ -33,6 +33,13 @@ class nginx::params {
   $multi_accept     = 'off'
   $accept_mutex     = 'off'
 
+  $event_model = $::kernel ? {
+    'FreeBSD' => 'kqueue',
+    'Linux'   => 'epoll',
+    'Solaris' => 'eventport',
+    default   => 'select',
+  }
+
   case $::operatingsystem {
     'RedHat', 'CentOS': {
       $pkg_ensure         = present

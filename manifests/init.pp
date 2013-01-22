@@ -8,6 +8,7 @@ class nginx (
   $config_user                   = $nginx::params::config_user,
   $daemon_user                   = $nginx::params::daemon_user,
   $default_type                  = $nginx::params::default_type,
+  $event_model                   = $nginx::params::event_model,
   $gzip                          = $nginx::params::gzip,
   $http                          = $nginx::params::http,
   $keepalive_timeout             = $nginx::params::keepalive_timeout,
