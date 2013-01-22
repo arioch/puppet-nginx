@@ -10,8 +10,9 @@ define nginx::proxy (
   $client_max_body_size    = '8m',
   $proxy_buffers           = '4 32k',
   $proxy_connect_timeout   = '150',
+  $proxy_ignore_headers    = undef,
   $proxy_read_timeout      = '100',
-  $proxy_send_timeout      = '100'
+  $proxy_send_timeout      = '100',
 ) {
 
   if ! $::nginx::http {

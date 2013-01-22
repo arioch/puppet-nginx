@@ -14,6 +14,10 @@ server {
     proxy_buffers           <%= scope.lookupvar('proxy_buffers') -%>;
     client_max_body_size    <%= scope.lookupvar('client_max_body_size') -%>;
     client_body_buffer_size <%= scope.lookupvar('client_body_buffer_size') -%>;
+  <% if @proxy_ignore_headers %>
+    <% proxy_ignore_headers.each do |ignore_header| %>proxy_ignore_headers    <%= ignore_header %>;
+    <% end -%>
+  <% end %>
   }
 }
 
