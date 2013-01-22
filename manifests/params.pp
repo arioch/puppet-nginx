@@ -27,7 +27,7 @@ class nginx::params {
   $mime_types        = '/etc/nginx/mime.types'
   $sendfile          = 'on'
   $tcp_nodelay       = 'on'
-  $tcp_nopush        = 'off'
+  $tcp_nopush        = 'on'
 
   $server_names_hash_bucket_size = '64'
 
