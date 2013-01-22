@@ -15,6 +15,7 @@ class nginx (
   $keepalive_timeout             = $nginx::params::keepalive_timeout,
   $logdir                        = $nginx::params::logdir,
   $mail                          = $nginx::params::mail,
+  $manage_repo                   = $nginx::params::manage_repo,
   $mime_types                    = $nginx::params::mime_types,
   $multi_accept                  = $nginx::params::multi_accept,
   $pidfile                       = $nginx::params::pidfile,
@@ -35,6 +36,7 @@ class nginx (
   $worker_processes              = $nginx::params::worker_processes
 ) inherits nginx::params {
 
+  class { 'nginx::preinstall': } ->
   class { 'nginx::install': } ->
   class { 'nginx::config': } ~>
   class { 'nginx::service': } ->

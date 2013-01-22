@@ -1,6 +1,8 @@
 # = Class nginx::params
 #
 class nginx::params {
+  $manage_repo = false
+
   # Generic parameters
   $http   = true
   $logdir = '/var/log/nginx'
