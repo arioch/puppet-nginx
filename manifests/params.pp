@@ -29,9 +29,9 @@ class nginx::params {
   $server_names_hash_bucket_size = '64'
 
   # Events module
-  $worker_processes = $::processorcount
-  $multi_accept     = 'off'
   $accept_mutex     = 'off'
+  $multi_accept     = 'on'
+  $worker_processes = $::processorcount
 
   $event_model = $::kernel ? {
     'FreeBSD' => 'kqueue',
