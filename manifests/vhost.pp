@@ -4,7 +4,7 @@ define nginx::vhost (
   $ensure      = present,
   $server_name = $name,
   $config_path = undef,
-  $listen      = [ '80', '443' ]
+  $listen      = [ '80', '443' ],
 ) {
   File {
     owner   => $::nginx::config_user,
@@ -14,17 +14,16 @@ define nginx::vhost (
   }
 
   if ! $config_path {
-    file {
-      "${::nginx::vhostdir_enabled}/${name}.conf":
-        ensure  => $ensure,
-        content => template ('nginx/vhost.conf.erb');
-
+    file { "${::nginx::vhostdir_enabled}/${name}.conf":
+      ensure  => $ensure,
+      content => template ('nginx/vhost.conf.erb');
     }
   } else {
     # config provided by application
     file { "${::nginx::vhostdir_enabled}/${name}.conf":
-        ensure => link,
-        target => $config_path,
-      }
+      ensure => link,
+      target => $config_path,
     }
+  }
 }
+

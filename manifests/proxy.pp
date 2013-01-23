@@ -66,6 +66,5 @@ define nginx::proxy (
       fail "Operatingsystem ${::operatingsystem} is not supported."
     }
   }
-
 }
 

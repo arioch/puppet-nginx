@@ -41,5 +41,5 @@ class nginx (
   class { 'nginx::config': } ~>
   class { 'nginx::service': } ->
   Class [ 'nginx' ]
-
 }
+

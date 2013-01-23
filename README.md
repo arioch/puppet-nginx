@@ -17,17 +17,17 @@
       class {
         'nginx':;
       }
-        
+
       Nginx::Proxy {
         ensure => present,
         enable => true,
       }
-    
+
       nginx::proxy {
         'test01.example.com': server_name => 'test01.example.com', proxy_pass => 'http://10.0.0.1';
         'test02.example.com': server_name => 'test02.example.com', proxy_pass => 'http://10.0.0.2';
       }
-    
+
     }
 
 ### HTTP reverse proxy, with load balancing
@@ -36,20 +36,20 @@
       class {
         'nginx':;
       }
-    
+
       Nginx::Proxy {
         ensure     => present,
         enable     => true,
         proxy_pass => 'http://backend',
       }
-    
+
       nginx::proxy {
         'test01.example.com': server_name => 'test01.example.com';
         'test02.example.com': server_name => 'test02.example.com';
         'test03.example.com': server_name => 'test03.example.com';
         'test04.example.com': server_name => 'test04.example.com';
       }
-    
+
       nginx::upstream { 'backend':
         ip_hash        => true,
         upstream_nodes => [
@@ -60,7 +60,7 @@
         ];
       }
     }
-    
+
 ### Load balancing with ip hashes (sticky connections)
 
 Sticky connections are useful for applications that rely on cookies or
@@ -84,14 +84,14 @@ This is usually the case for PHP applications so it's enabled by default.
       class {
         'nginx': mail => true;
       }
-    
+
       Nginx::Mail {
         ensure         => present,
         server_name    => $::fqdn,
         listen_address => $::ipaddress,
         proxy          => 'on'
       }
-    
+
       nginx::mail {
         'imap':     listen_port => '143', protocol => 'imap';
         'imaps':    listen_port => '993', protocol => 'imap';

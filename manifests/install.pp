@@ -5,3 +5,4 @@ class nginx::install {
     ensure => $::nginx::pkg_ensure,
   }
 }
+

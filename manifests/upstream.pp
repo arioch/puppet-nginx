@@ -17,6 +17,5 @@ define nginx::upstream (
     content => template('nginx/upstream.erb'),
     order   => 14,
   }
-
 }
 

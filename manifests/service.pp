@@ -8,3 +8,4 @@ class nginx::service {
     require   => Class['nginx::config'];
   }
 }
+

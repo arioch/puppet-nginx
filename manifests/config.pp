@@ -106,6 +106,5 @@ class nginx::config {
     content => "\n",
     order   => 100,
   }
-
 }
 

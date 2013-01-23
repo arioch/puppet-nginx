@@ -69,6 +69,5 @@ define nginx::mail (
     content => template('nginx/mail.erb'),
     order   => 18,
   }
-
 }
 
