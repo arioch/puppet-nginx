@@ -4,9 +4,11 @@
     tcp_nopush        <%= scope.lookupvar('nginx::tcp_nopush') %>;
     keepalive_timeout <%= scope.lookupvar('nginx::keepalive_timeout') %>;
     tcp_nodelay       <%= scope.lookupvar('nginx::tcp_nodelay') %>;
-    gzip              <%= scope.lookupvar('nginx::gzip') %>;
-    gzip_disable      "<%= scope.lookupvar('nginx::gzip_disable') %>";
     default_type      <%= scope.lookupvar('nginx::default_type') %>;
+    gzip              <%= scope.lookupvar('nginx::gzip') %>;
+<% if @gzip == 'on' -%>
+    gzip_disable      "<%= scope.lookupvar('nginx::gzip_disable') %>";
+<% end -%>
 
     server_names_hash_bucket_size <%= scope.lookupvar('nginx::server_names_hash_bucket_size') %>;
 
