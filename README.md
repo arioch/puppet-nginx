@@ -103,3 +103,12 @@ This is usually the case for PHP applications so it's enabled by default.
       }
     }
 
+### Enable status page
+
+    node /box/ {
+      class { 'nginx':
+        status_enable => true,
+        status_allow  => '127.0.0.1',
+        status_deny   => 'all',
+      }
+

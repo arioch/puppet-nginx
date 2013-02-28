@@ -27,6 +27,9 @@ class nginx (
   $service_ensure                = $nginx::params::service_ensure,
   $service_hasstatus             = $nginx::params::service_hasstatus,
   $service_name                  = $nginx::params::service_name,
+  $status_allow                  = $nginx::params::status_allow,
+  $status_deny                   = $nginx::params::status_deny,
+  $status_enable                 = $nginx::params::status_enable,
   $tcp_nodelay                   = $nginx::params::tcp_nodelay,
   $tcp_nopush                    = $nginx::params::tcp_nopush,
   $vhostdir_available            = $nginx::params::vhostdir_available,
@@ -35,7 +38,6 @@ class nginx (
   $worker_priority               = $nginx::params::worker_priority,
   $worker_processes              = $nginx::params::worker_processes
 ) inherits nginx::params {
-
   class { 'nginx::preinstall': } ->
   class { 'nginx::install': } ->
   class { 'nginx::config': } ~>

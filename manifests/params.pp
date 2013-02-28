@@ -4,9 +4,12 @@ class nginx::params {
   $manage_repo = false
 
   # Generic parameters
-  $http   = true
-  $logdir = '/var/log/nginx'
-  $mail   = false
+  $http          = true
+  $logdir        = '/var/log/nginx'
+  $mail          = false
+  $status_allow  = '127.0.0.1'
+  $status_deny   = 'all'
+  $status_enable = true
 
   # nginx.conf
   $worker_priority = '0'

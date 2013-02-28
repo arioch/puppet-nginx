@@ -15,6 +15,13 @@ class nginx::config {
       file { $::nginx::vhostdir_enabled:
         ensure => directory;
       }
+
+      if $nginx::status_enable {
+        file { "${::nginx::vhostdir_enabled}/status.conf":
+          ensure  => present,
+          content => template('nginx/status.erb'),
+        }
+      }
     }
 
     'Debian', 'Ubuntu': {
@@ -24,6 +31,18 @@ class nginx::config {
 
         $::nginx::vhostdir_available:
           ensure => directory;
+      }
+
+      if $nginx::status_enable {
+        file {
+          "${::nginx::vhostdir_available}/status.conf":
+            ensure  => present,
+            content => template('nginx/status.erb');
+
+          "${::nginx::vhostdir_enabled}/status.conf":
+            ensure => link,
+            target => "${::nginx::vhostdir_available}/status.conf";
+        }
       }
     }
 
