@@ -44,10 +44,10 @@
       }
 
       nginx::proxy {
-        'test01.example.com': server_name => 'test01.example.com';
-        'test02.example.com': server_name => 'test02.example.com';
-        'test03.example.com': server_name => 'test03.example.com';
-        'test04.example.com': server_name => 'test04.example.com';
+        'test01.example.com': server_name => 'test01.example.com', proxy_pass => 'http://backend';
+        'test02.example.com': server_name => 'test02.example.com', proxy_pass => 'http://backend';
+        'test03.example.com': server_name => 'test03.example.com', proxy_pass => 'http://backend';
+        'test04.example.com': server_name => 'test04.example.com', proxy_pass => 'http://backend';
       }
 
       nginx::upstream { 'backend':
