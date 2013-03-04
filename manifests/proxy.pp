@@ -3,6 +3,7 @@
 define nginx::proxy (
   $proxy_pass,
   $ensure                  = present,
+  $access_log              = true,
   $enable                  = false,
   $server_name             = $name,
   $listen                  = [ '80', '443' ],

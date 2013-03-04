@@ -78,6 +78,19 @@ This is usually the case for PHP applications so it's enabled by default.
       ];
     }
 
+### Disable access logs
+
+    node /frontend/ {
+      class {
+        'nginx':;
+      }
+
+      nginx::proxy { 'test01.example.com':
+        server_name => 'test01.example.com',
+        access_log  => false,
+      }
+    }
+
 ### Mail proxy
 
     node /frontend/ {

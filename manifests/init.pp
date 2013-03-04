@@ -2,6 +2,7 @@
 #
 class nginx (
   $accept_mutex                  = $nginx::params::accept_mutex,
+  $access_log                    = $nginx::params::access_log,
   $config_dir                    = $nginx::params::config_dir,
   $config_group                  = $nginx::params::config_group,
   $config_mode                   = $nginx::params::config_mode,

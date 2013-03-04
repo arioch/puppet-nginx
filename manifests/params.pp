@@ -4,6 +4,7 @@ class nginx::params {
   $manage_repo = false
 
   # Generic parameters
+  $access_log    = true
   $http          = true
   $logdir        = '/var/log/nginx'
   $mail          = false
