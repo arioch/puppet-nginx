@@ -17,11 +17,7 @@ class nginx::params {
 
   # The number of worker connections should never be higher
   # than the maximum number of open file descriptors.
-  if ( $::processorcount * 1024 ) >= 65536 {
-    $worker_connections = 61440
-  } else {
-    $worker_connections = ( 1024 * $::processorcount )
-  }
+  $worker_connections = 61440
 
   # HTTP module
   $default_type      = 'application/octet-stream'
