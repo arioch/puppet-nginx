@@ -47,9 +47,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  facter (>= 1.6.16)
+  facter (>= 1.6.17)
   librarian-puppet (>= 0.9.7)
-  puppet (>= 3.0.1)
+  puppet (>= 3.1.0)
   puppet-lint (>= 0.3.2)
   puppetlabs_spec_helper (>= 0.3.0)
   rake
