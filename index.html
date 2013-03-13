@@ -76,10 +76,10 @@
   }
 
   nginx::proxy {
-    'test01.example.com': server_name =&gt; 'test01.example.com';
-    'test02.example.com': server_name =&gt; 'test02.example.com';
-    'test03.example.com': server_name =&gt; 'test03.example.com';
-    'test04.example.com': server_name =&gt; 'test04.example.com';
+    'test01.example.com': server_name =&gt; 'test01.example.com', proxy_pass =&gt; 'http://backend';
+    'test02.example.com': server_name =&gt; 'test02.example.com', proxy_pass =&gt; 'http://backend';
+    'test03.example.com': server_name =&gt; 'test03.example.com', proxy_pass =&gt; 'http://backend';
+    'test04.example.com': server_name =&gt; 'test04.example.com', proxy_pass =&gt; 'http://backend';
   }
 
   nginx::upstream { 'backend':
@@ -112,6 +112,35 @@ being served by the same backend node for different reasons.</p>
 }
 </code></pre>
 
+<h3>Disable access logs</h3>
+
+<pre><code>node /frontend/ {
+  class {
+    'nginx':;
+  }
+
+  nginx::proxy { 'test01.example.com':
+    server_name =&gt; 'test01.example.com',
+    access_log  =&gt; false,
+  }
+}
+</code></pre>
+
+<h3>Configure proxy cache</h3>
+
+<pre><code>node /frontend/ {
+  class { 'nginx':
+     proxy_cache           = true,
+     proxy_cache_dir       = '/cache',
+     proxy_cache_path      = '/cache/static levels=1:2 keys_zone=staticfilecache:60m inactive=90m max_size=500m',
+     proxy_connect_timeout = '30',
+     proxy_read_timeout    = '120',
+     proxy_send_timeout    = '120',
+     proxy_temp_path       = '/cache/tmp',
+  }
+}
+</code></pre>
+
 <h3>Mail proxy</h3>
 
 <pre><code>node /frontend/ {
@@ -136,6 +165,16 @@ being served by the same backend node for different reasons.</p>
     'smtp-587': listen_port =&gt; '587', protocol =&gt; 'smtp';
   }
 }
+</code></pre>
+
+<h3>Enable status page</h3>
+
+<pre><code>node /box/ {
+  class { 'nginx':
+    status_enable =&gt; true,
+    status_allow  =&gt; '127.0.0.1',
+    status_deny   =&gt; 'all',
+  }
 </code></pre>
       </section>
       <footer>
