@@ -104,6 +104,45 @@ class nginx::config {
     }
   }
 
+  if $::nginx::proxy_cache and $::nginx::http {
+    $proxy_cache           = $::nginx::proxy_cache
+    $proxy_cache_dir       = $::nginx::proxy_cache_dir
+    $proxy_cache_path      = $::nginx::proxy_cache_path
+    $proxy_connect_timeout = $::nginx::proxy_connect_timeout
+    $proxy_read_timeout    = $::nginx::proxy_read_timeout
+    $proxy_send_timeout    = $::nginx::proxy_send_timeout
+    $proxy_temp_path       = $::nginx::proxy_temp_path
+
+    $_proxy_cache_dir  = regsubst($proxy_cache_dir, '\ .*', '', 'G')
+    $_proxy_cache_path = regsubst($proxy_cache_path, '\ .*', '', 'G')
+    $_proxy_temp_path  = regsubst($proxy_temp_path, '\ .*', '', 'G')
+
+    file {
+      $_proxy_cache_dir:
+        ensure => directory,
+        owner  => $::nginx::daemon_user,
+        group  => $::nginx::daemon_group;
+
+      $_proxy_cache_path:
+        ensure  => directory,
+        owner   => $::nginx::daemon_user,
+        group   => $::nginx::daemon_group,
+        require => File[$_proxy_cache_dir];
+
+      $_proxy_temp_path:
+        ensure  => directory,
+        owner   => $::nginx::daemon_user,
+        group   => $::nginx::daemon_group,
+        require => File[$_proxy_cache_dir];
+    }
+
+    concat::fragment { 'nginx.conf_body_http_caching':
+      target  => "${::nginx::config_dir}/nginx.conf",
+      content => template('nginx/proxy_cache.erb'),
+      order   => 14,
+    }
+  }
+
   # Mail module configuration
   if $::nginx::mail {
     concat::fragment { 'nginx.conf_body_mail_header':

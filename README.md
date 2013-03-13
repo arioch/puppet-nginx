@@ -91,6 +91,28 @@ This is usually the case for PHP applications so it's enabled by default.
       }
     }
 
+### Configure proxy cache
+
+    node /frontend/ {
+      class { 'nginx':
+         proxy_cache           = true,
+         proxy_cache_dir       = '/cache',
+         proxy_cache_path      = '/cache/static levels=1:2 keys_zone=staticfilecache:60m inactive=90m max_size=500m',
+         proxy_connect_timeout = '30',
+         proxy_read_timeout    = '120',
+         proxy_send_timeout    = '120',
+         proxy_temp_path       = '/cache/tmp',
+      }
+
+      nginx::proxy { 'proxy01.example.com':
+        server_name          => 'proxy01.example.com',
+        proxy_pass           => 'http://backend01',
+        proxy_cache_enable   => true,
+        expires              => '864000',
+        proxy_cache_location => '~* /.*(jpg|jpeg|png|gif|css|mp3|wav|swf|mov|ico|htm|html)$';
+      }
+    }
+
 ### Mail proxy
 
     node /frontend/ {

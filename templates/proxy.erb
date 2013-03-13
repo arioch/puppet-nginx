@@ -3,6 +3,11 @@ server {
   <% end %>
   server_name <%= scope.lookupvar('server_name') -%>;
 
+  <% if @proxy_cache_enable %>location <%= proxy_cache_location %> {
+    expires    <%= proxy_cache_expires %>;
+    proxy_pass <%= proxy_cache_pass %>;
+  }<% end %>
+
   location / {
     proxy_pass              <%= scope.lookupvar('proxy_pass') -%>;
     proxy_set_header        Host $host;
@@ -17,7 +22,8 @@ server {
   <% if @proxy_ignore_headers %>
     <% proxy_ignore_headers.each do |ignore_header| %>proxy_ignore_headers    <%= ignore_header %>;
     <% end -%>
-  <% end %>
+  <% end -%>
+
   }
 }
 

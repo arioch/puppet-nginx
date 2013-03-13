@@ -29,6 +29,14 @@ class nginx::params {
   $tcp_nodelay       = 'on'
   $tcp_nopush        = 'on'
 
+  $proxy_cache           = false
+  $proxy_cache_dir       = '/cache'
+  $proxy_cache_path      = '/cache/static levels=1:2 keys_zone=staticfilecache:60m inactive=90m max_size=500m'
+  $proxy_connect_timeout = '30'
+  $proxy_read_timeout    = '120'
+  $proxy_send_timeout    = '120'
+  $proxy_temp_path       = '/cache/tmp'
+
   $server_names_hash_bucket_size = '64'
 
   # Events module
