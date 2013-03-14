@@ -4,8 +4,9 @@ server {
   server_name <%= scope.lookupvar('server_name') -%>;
 
   <% if @proxy_cache_enable %>location <%= proxy_cache_location %> {
-    expires    <%= proxy_cache_expires %>;
-    proxy_pass <%= proxy_cache_pass %>;
+    proxy_cache_valid <%= proxy_cache_valid %>;
+    expires           <%= proxy_cache_expires %>;
+    proxy_pass        <%= proxy_cache_pass %>;
   }<% end %>
 
   location / {
