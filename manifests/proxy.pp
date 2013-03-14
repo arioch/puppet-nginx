@@ -9,6 +9,7 @@ define nginx::proxy (
   $enable                  = false,
   $listen                  = [ '80', '443' ],
   $proxy_buffers           = '4 32k',
+  $proxy_cache             = undef,
   $proxy_cache_enable      = false,
   $proxy_cache_expires     = '864000',
   $proxy_cache_location    = '~* /.*(jpg|jpeg|png|gif|css|mp3|wav|swf|mov|ico|htm|html)$',

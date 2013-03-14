@@ -97,6 +97,12 @@ class nginx::config {
       order   => 12,
     }
 
+    concat::fragment { 'nginx.conf_body_http_includes':
+      target  => "${::nginx::config_dir}/nginx.conf",
+      content => template('nginx/http_includes.erb'),
+      order   => 14,
+    }
+
     concat::fragment { 'nginx.conf_body_http_footer':
       target  => "${::nginx::config_dir}/nginx.conf",
       content => "}\n\n",
@@ -139,7 +145,7 @@ class nginx::config {
     concat::fragment { 'nginx.conf_body_http_caching':
       target  => "${::nginx::config_dir}/nginx.conf",
       content => template('nginx/proxy_cache.erb'),
-      order   => 14,
+      order   => 13,
     }
   }
 

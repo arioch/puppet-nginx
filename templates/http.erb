@@ -10,5 +10,3 @@
 
     server_names_hash_bucket_size <%= scope.lookupvar('nginx::server_names_hash_bucket_size') %>;
 
-    include <%= scope.lookupvar('nginx::vhostdir_enabled') %>/*;
-

@@ -7,6 +7,7 @@ server {
     proxy_cache_valid <%= proxy_cache_valid %>;
     expires           <%= proxy_cache_expires %>;
     proxy_pass        <%= proxy_cache_pass %>;
+    <% if @proxy_cache %>proxy_cache       <%= proxy_cache %><% else %>#proxy_cache      staticfilecache<% end %>;
   }<% end %>
 
   location / {
