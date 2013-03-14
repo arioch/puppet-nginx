@@ -3,6 +3,9 @@ server {
   <% end %>
   server_name <%= scope.lookupvar('server_name') -%>;
 
+  <% if @error_log -%>error_log  <%= scope.lookupvar('nginx::logdir') %>/<%= name %>_error.log;<% else %>#error_log<% end %>
+  <% if @access_log -%>access_log <%= scope.lookupvar('nginx::logdir') %>/<%= name %>_access.log;<% else %>#access_log<% end %>
+
   <% if @proxy_cache_enable %>location <%= proxy_cache_location %> {
     proxy_cache_valid <%= proxy_cache_valid %>;
     expires           <%= proxy_cache_expires %>;

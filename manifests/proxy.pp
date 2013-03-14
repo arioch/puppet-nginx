@@ -7,6 +7,7 @@ define nginx::proxy (
   $client_body_buffer_size = '128k',
   $client_max_body_size    = '8m',
   $enable                  = false,
+  $error_log               = true,
   $listen                  = [ '80', '443' ],
   $proxy_buffers           = '4 32k',
   $proxy_cache             = undef,
