@@ -22,7 +22,11 @@ class nginx::params {
   # HTTP module
   $default_type      = 'application/octet-stream'
   $gzip              = 'on'
+  $gzip_comp_level   = '4'
   $gzip_disable      = 'MSIE [1-6]\.(?!.*SV1)'
+  $gzip_proxied      = 'any'
+  $gzip_static       = 'on'
+  $gzip_types        = 'text/plain text/css text/javascript application/json application/x-javascript'
   $keepalive_timeout = '65'
   $mime_types        = '/etc/nginx/mime.types'
   $sendfile          = 'on'
