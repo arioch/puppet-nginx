@@ -16,7 +16,7 @@ define nginx::proxy (
   $proxy_cache_location    = '~* /.*(jpg|jpeg|png|gif|css|mp3|wav|swf|mov|ico|htm|html)$',
   $proxy_cache_pass        = $proxy_pass,
   $proxy_cache_valid       = '200 120m',
-  $proxy_connect_timeout   = '150',
+  $proxy_connect_timeout   = '60',
   $proxy_ignore_headers    = undef,
   $proxy_read_timeout      = '100',
   $proxy_send_timeout      = '100',
