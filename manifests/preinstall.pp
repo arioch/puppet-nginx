@@ -1,4 +1,4 @@
-# = Class: nginx::preinstall
+# == Class: nginx::preinstall
 #
 # This class provides anything required by the install class.
 # Such as package repositories.

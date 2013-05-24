@@ -1,4 +1,4 @@
-# = Class nginx::install
+# == Class nginx::install
 #
 class nginx::install {
   package { $::nginx::pkg_list:

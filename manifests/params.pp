@@ -1,4 +1,4 @@
-# = Class nginx::params
+# == Class nginx::params
 #
 class nginx::params {
   $manage_repo = false

@@ -1,4 +1,4 @@
-# = Define nginx::vhost
+# == Define nginx::vhost
 #
 define nginx::vhost (
   $ensure      = present,

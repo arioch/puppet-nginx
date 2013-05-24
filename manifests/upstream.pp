@@ -1,4 +1,4 @@
-# = Define nginx::upstream
+# == Define nginx::upstream
 #
 define nginx::upstream (
   $upstream_nodes,

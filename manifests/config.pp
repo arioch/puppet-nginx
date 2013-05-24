@@ -1,4 +1,4 @@
-# = Class nginx::config
+# == Class nginx::config
 #
 class nginx::config {
   File {

@@ -1,4 +1,4 @@
-# = Class nginx
+# == Class nginx
 #
 class nginx (
   $accept_mutex                  = $nginx::params::accept_mutex,

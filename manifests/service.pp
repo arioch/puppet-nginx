@@ -1,4 +1,4 @@
-# = Class nginx
+# == Class nginx
 #
 class nginx::service {
   service { $nginx::service_name:

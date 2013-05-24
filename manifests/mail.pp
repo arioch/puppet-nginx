@@ -1,4 +1,4 @@
-# = Define nginx::mail
+# == Define nginx::mail
 #
 define nginx::mail (
   $server_name,
