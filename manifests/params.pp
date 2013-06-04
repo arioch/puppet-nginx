@@ -58,6 +58,7 @@ class nginx::params {
   case $::operatingsystem {
     'RedHat', 'CentOS': {
       $config_dir          = '/etc/nginx'
+      $config_dir_mode     = '0755'
       $config_file_mode    = '0644'
       $config_group        = 'root'
       $config_user         = 'root'
@@ -75,6 +76,7 @@ class nginx::params {
 
     'Debian', 'Ubuntu': {
       $config_dir          = '/etc/nginx'
+      $config_dir_mode     = '0755'
       $config_file_mode    = '0644'
       $config_group        = 'root'
       $config_user         = 'root'

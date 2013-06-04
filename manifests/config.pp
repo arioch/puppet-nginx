@@ -8,7 +8,8 @@ class nginx::config {
   }
 
   file { $nginx::config_dir:
-    ensure => directory;
+    ensure => directory,
+    mode   => $nginx::config_dir_mode,
   }
 
   case $::operatingsystem {
