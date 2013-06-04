@@ -224,18 +224,35 @@ describe 'nginx', :type => :class do
   end
 
   describe 'on Debian with parameter: proxy_cache' do
-    let (:facts) { debian_facts }
-    let (:params) { { :proxy_cache => true } }
+    context 'proxy_cache => true' do
+      let (:facts) { debian_facts }
+      let (:params) { { :proxy_cache => true } }
 
-    it { should create_class('nginx') }
-    it { should contain_concat__fragment('nginx.conf_body_http_caching') }
+      it { should contain_concat__fragment('nginx.conf_body_http_caching') }
+    end
+
+    context 'proxy_cache => false' do
+      let (:facts) { debian_facts }
+      let (:params) { { :proxy_cache => false } }
+
+      it { should_not contain_concat__fragment('nginx.conf_body_http_caching') }
+    end
   end
 
   describe 'on Debian with parameter: proxy_cache_dir' do
-    let (:facts) { debian_facts }
-    let (:params) { { :proxy_cache => true, :proxy_cache_dir => '_VALUE_' } }
+    context 'proxy_cache_dir => true' do
+      let (:facts) { debian_facts }
+      let (:params) { { :proxy_cache => true, :proxy_cache_dir => '_VALUE_' } }
 
-    it { should contain_file('_VALUE_').with_ensure('directory') }
+      it { should contain_file('_VALUE_').with_ensure('directory') }
+    end
+
+    context 'proxy_cache_dir => false' do
+      let (:facts) { debian_facts }
+      let (:params) { { :proxy_cache => false, :proxy_cache_dir => '_VALUE_' } }
+
+      it { should_not contain_file('_VALUE_').with_ensure('directory') }
+    end
   end
 
   describe 'on Debian with parameter: proxy_cache_path' do
@@ -246,24 +263,51 @@ describe 'nginx', :type => :class do
   end
 
   describe 'on Debian with parameter: proxy_connect_timeout' do
-    let (:facts) { debian_facts }
-    let (:params) { { :proxy_cache => true, :proxy_connect_timeout => '_VALUE_' } }
+    context 'proxy_connect_timeout => true' do
+      let (:facts) { debian_facts }
+      let (:params) { { :proxy_cache => true, :proxy_connect_timeout => '_VALUE_' } }
 
-    it { should contain_concat__fragment('nginx.conf_body_http_caching').with_content(/_VALUE_/) }
+      it { should contain_concat__fragment('nginx.conf_body_http_caching').with_content(/_VALUE_/) }
+    end
+
+    context 'proxy_connect_timeout => false' do
+      let (:facts) { debian_facts }
+      let (:params) { { :proxy_cache => false, :proxy_connect_timeout => '_VALUE_' } }
+
+      it { should_not contain_concat__fragment('nginx.conf_body_http_caching').with_content(/_VALUE_/) }
+    end
   end
 
   describe 'on Debian with parameter: proxy_read_timeout' do
-    let (:facts) { debian_facts }
-    let (:params) { { :proxy_cache => true, :proxy_read_timeout => '_VALUE_' } }
+    context 'proxy_read_timeout => true' do
+      let (:facts) { debian_facts }
+      let (:params) { { :proxy_cache => true, :proxy_read_timeout => '_VALUE_' } }
 
-    it { should contain_concat__fragment('nginx.conf_body_http_caching').with_content(/_VALUE_/) }
+      it { should contain_concat__fragment('nginx.conf_body_http_caching').with_content(/_VALUE_/) }
+    end
+
+    context 'proxy_read_timeout => false' do
+      let (:facts) { debian_facts }
+      let (:params) { { :proxy_cache => false, :proxy_read_timeout => '_VALUE_' } }
+
+      it { should_not contain_concat__fragment('nginx.conf_body_http_caching').with_content(/_VALUE_/) }
+    end
   end
 
   describe 'on Debian with parameter: proxy_send_timeout' do
-    let (:facts) { debian_facts }
-    let (:params) { { :proxy_cache => true, :proxy_send_timeout => '_VALUE_' } }
+    context 'proxy_send_timeout => true' do
+      let (:facts) { debian_facts }
+      let (:params) { { :proxy_cache => true, :proxy_send_timeout => '_VALUE_' } }
 
-    it { should contain_concat__fragment('nginx.conf_body_http_caching').with_content(/_VALUE_/) }
+      it { should contain_concat__fragment('nginx.conf_body_http_caching').with_content(/_VALUE_/) }
+    end
+
+    context 'proxy_send_timeout => false' do
+      let (:facts) { debian_facts }
+      let (:params) { { :proxy_cache => false, :proxy_send_timeout => '_VALUE_' } }
+
+      it { should_not contain_concat__fragment('nginx.conf_body_http_caching').with_content(/_VALUE_/) }
+    end
   end
 
   describe 'on Debian with parameter: proxy_temp_path' do
