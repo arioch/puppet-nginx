@@ -2,12 +2,7 @@ require 'spec_helper'
 
 describe 'nginx', :type => :class do
   let(:pre_condition) { '$concat_basedir = "/tmp"' }
-  let (:params) {
-    {
-      :config_dir => '/etc/nginx',
-      :config_dir => '/etc/nginx'
-    }
-  }
+  let (:params) { { :config_dir => '/etc/nginx' } }
 
   describe 'on Debian with parameter: accept_mutex' do
     let (:facts) { debian_facts }
