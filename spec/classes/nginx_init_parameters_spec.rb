@@ -129,13 +129,25 @@ describe 'nginx', :type => :class do
   end
 
   describe 'on Debian with parameter: http' do
-    let (:facts) { debian_facts }
-    let (:params) { { :http => '_VALUE_' } }
+    context 'http => true' do
+      let (:facts) { debian_facts }
+      let (:params) { { :http => true } }
 
-    it { should contain_concat__fragment('nginx.conf_body_http_content') }
-    it { should contain_concat__fragment('nginx.conf_body_http_footer') }
-    it { should contain_concat__fragment('nginx.conf_body_http_header') }
-    it { should contain_concat__fragment('nginx.conf_body_http_includes') }
+      it { should contain_concat__fragment('nginx.conf_body_http_content') }
+      it { should contain_concat__fragment('nginx.conf_body_http_footer') }
+      it { should contain_concat__fragment('nginx.conf_body_http_header') }
+      it { should contain_concat__fragment('nginx.conf_body_http_includes') }
+    end
+
+    context 'http => false' do
+      let (:facts) { debian_facts }
+      let (:params) { { :http => false } }
+
+      it { should_not contain_concat__fragment('nginx.conf_body_http_content') }
+      it { should_not contain_concat__fragment('nginx.conf_body_http_footer') }
+      it { should_not contain_concat__fragment('nginx.conf_body_http_header') }
+      it { should_not contain_concat__fragment('nginx.conf_body_http_includes') }
+    end
   end
 
   describe 'on Debian with parameter: keepalive_timeout' do
