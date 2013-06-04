@@ -17,10 +17,19 @@ describe 'nginx', :type => :class do
   end
 
   describe 'on Debian with parameter: access_log' do
-    let (:facts) { debian_facts }
-    let (:params) { { :access_log => true } }
+    context 'access_log => true' do
+      let (:facts) { debian_facts }
+      let (:params) { { :access_log => true } }
 
-    it { should contain_concat__fragment('nginx.conf_body_http_content').with_content(/access_log/) }
+      it { should contain_concat__fragment('nginx.conf_body_http_content').with_content(/access_log/) }
+    end
+
+    context 'access_log => false' do
+      let (:facts) { debian_facts }
+      let (:params) { { :access_log => false } }
+
+      it { should_not contain_concat__fragment('nginx.conf_body_http_content').with_content(/access_log/) }
+    end
   end
 
   describe 'on Debian with parameter: config_dir' do
