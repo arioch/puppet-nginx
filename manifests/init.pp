@@ -4,8 +4,9 @@ class nginx (
   $accept_mutex                  = $nginx::params::accept_mutex,
   $access_log                    = $nginx::params::access_log,
   $config_dir                    = $nginx::params::config_dir,
+  $config_dir_mode               = $nginx::params::config_dir_mode,
+  $config_file_mode              = $nginx::params::config_file_mode,
   $config_group                  = $nginx::params::config_group,
-  $config_mode                   = $nginx::params::config_mode,
   $config_user                   = $nginx::params::config_user,
   $daemon_user                   = $nginx::params::daemon_user,
   $default_type                  = $nginx::params::default_type,
@@ -37,6 +38,7 @@ class nginx (
   $server_names_hash_bucket_size = $nginx::params::server_names_hash_bucket_size,
   $service_enable                = $nginx::params::service_enable,
   $service_ensure                = $nginx::params::service_ensure,
+  $service_hasrestart            = $nginx::params::service_hasrestart,
   $service_hasstatus             = $nginx::params::service_hasstatus,
   $service_name                  = $nginx::params::service_name,
   $status_allow                  = $nginx::params::status_allow,
@@ -48,7 +50,7 @@ class nginx (
   $vhostdir_enabled              = $nginx::params::vhostdir_enabled,
   $worker_connections            = $nginx::params::worker_connections,
   $worker_priority               = $nginx::params::worker_priority,
-  $worker_processes              = $nginx::params::worker_processes
+  $worker_processes              = $nginx::params::worker_processes,
 ) inherits nginx::params {
   class { 'nginx::preinstall': } ->
   class { 'nginx::install': } ->

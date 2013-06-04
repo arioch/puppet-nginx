@@ -57,36 +57,38 @@ class nginx::params {
 
   case $::operatingsystem {
     'RedHat', 'CentOS': {
-      $pkg_ensure         = present
-      $pkg_list           = 'nginx'
-      $service_name       = 'nginx'
-      $service_ensure     = 'running'
-      $service_enable     = true
-      $service_hasstatus  = true
-      $config_user        = 'root'
-      $config_group       = 'root'
-      $config_mode        = '0644'
-      $daemon_user        = 'nginx'
-      $config_dir         = '/etc/nginx'
-      $vhostdir_enabled   = '/etc/nginx/conf.d'
-      $pidfile            = '/var/run/nginx.pid'
+      $config_dir          = '/etc/nginx'
+      $config_file_mode    = '0644'
+      $config_group        = 'root'
+      $config_user         = 'root'
+      $daemon_user         = 'nginx'
+      $pidfile             = '/var/run/nginx.pid'
+      $pkg_ensure          = present
+      $pkg_list            = 'nginx'
+      $service_enable      = true
+      $service_ensure      = 'running'
+      $service_hasrestart   = true
+      $service_hasstatus   = true
+      $service_name        = 'nginx'
+      $vhostdir_enabled    = '/etc/nginx/conf.d'
     }
 
     'Debian', 'Ubuntu': {
-      $pkg_ensure         = present
-      $pkg_list           = 'nginx'
-      $service_name       = 'nginx'
-      $service_ensure     = 'running'
-      $service_enable     = true
-      $service_hasstatus  = true
-      $config_user        = 'root'
-      $config_group       = 'root'
-      $config_mode        = '0644'
-      $daemon_user        = 'www-data'
-      $config_dir         = '/etc/nginx'
-      $vhostdir_enabled   = '/etc/nginx/sites-enabled'
-      $vhostdir_available = '/etc/nginx/sites-available'
-      $pidfile            = '/var/run/nginx.pid'
+      $config_dir          = '/etc/nginx'
+      $config_file_mode    = '0644'
+      $config_group        = 'root'
+      $config_user         = 'root'
+      $daemon_user         = 'www-data'
+      $pidfile             = '/var/run/nginx.pid'
+      $pkg_ensure          = present
+      $pkg_list            = 'nginx'
+      $service_enable      = true
+      $service_ensure      = 'running'
+      $service_hasrestart  = true
+      $service_hasstatus   = true
+      $service_name        = 'nginx'
+      $vhostdir_available  = '/etc/nginx/sites-available'
+      $vhostdir_enabled    = '/etc/nginx/sites-enabled'
     }
 
     default: {
