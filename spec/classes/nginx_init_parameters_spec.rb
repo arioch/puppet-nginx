@@ -367,24 +367,51 @@ describe 'nginx', :type => :class do
   end
 
   describe 'on Debian with parameter: status_allow' do
-    let (:facts) { debian_facts }
-    let (:params) { { :status_allow => '_VALUE_', :status_enable => true, :vhostdir_enabled => '_VHOSTDIR_' } }
+    context 'status_enable => true' do
+      let (:facts) { debian_facts }
+      let (:params) { { :status_allow => '_VALUE_', :status_enable => true, :vhostdir_enabled => '_VHOSTDIR_' } }
 
-    it { should contain_file('_VHOSTDIR_/status.conf').with_ensure('link') }
+      it { should contain_file('_VHOSTDIR_/status.conf').with_ensure('link') }
+    end
+
+    context 'status_enable => false' do
+      let (:facts) { debian_facts }
+      let (:params) { { :status_allow => '_VALUE_', :status_enable => false, :vhostdir_enabled => '_VHOSTDIR_' } }
+
+      it { should_not contain_file('_VHOSTDIR_/status.conf').with_ensure('link') }
+    end
   end
 
   describe 'on Debian with parameter: status_deny' do
-    let (:facts) { debian_facts }
-    let (:params) { { :status_deny => '_VALUE_', :status_enable => true, :vhostdir_enabled => '_VHOSTDIR_' } }
+    context 'status_enable => true' do
+      let (:facts) { debian_facts }
+      let (:params) { { :status_deny => '_VALUE_', :status_enable => true, :vhostdir_enabled => '_VHOSTDIR_' } }
 
-    it { should contain_file('_VHOSTDIR_/status.conf').with_ensure('link') }
+      it { should contain_file('_VHOSTDIR_/status.conf').with_ensure('link') }
+    end
+
+    context 'status_enable => false' do
+      let (:facts) { debian_facts }
+      let (:params) { { :status_deny => '_VALUE_', :status_enable => false, :vhostdir_enabled => '_VHOSTDIR_' } }
+
+      it { should_not contain_file('_VHOSTDIR_/status.conf').with_ensure('link') }
+    end
   end
 
   describe 'on Debian with parameter: status_enable' do
-    let (:facts) { debian_facts }
-    let (:params) { { :status_enable => true, :vhostdir_enabled => '_VHOSTDIR_' } }
+    context 'status_enable => true' do
+      let (:facts) { debian_facts }
+      let (:params) { { :status_enable => '_VALUE_', :status_enable => true, :vhostdir_enabled => '_VHOSTDIR_' } }
 
-    it { should contain_file('_VHOSTDIR_/status.conf').with_ensure('link') }
+      it { should contain_file('_VHOSTDIR_/status.conf').with_ensure('link') }
+    end
+
+    context 'status_enable => false' do
+      let (:facts) { debian_facts }
+      let (:params) { { :status_enable => '_VALUE_', :status_enable => false, :vhostdir_enabled => '_VHOSTDIR_' } }
+
+      it { should_not contain_file('_VHOSTDIR_/status.conf').with_ensure('link') }
+    end
   end
 
   describe 'on Debian with parameter: tcp_nodelay' do
