@@ -169,11 +169,20 @@ describe 'nginx', :type => :class do
   end
 
   describe 'on Debian with parameter: mail' do
-    let (:facts) { debian_facts }
-    let (:params) { { :mail => '_VALUE_' } }
+    context 'mail => enable' do
+      let (:facts) { debian_facts }
+      let (:params) { { :mail => '_VALUE_' } }
 
-    it { should contain_concat__fragment('nginx.conf_body_mail_header') }
-    it { should contain_concat__fragment('nginx.conf_body_mail_footer') }
+      it { should contain_concat__fragment('nginx.conf_body_mail_header') }
+      it { should contain_concat__fragment('nginx.conf_body_mail_footer') }
+    end
+
+    context 'mail => disable' do
+      let (:facts) { debian_facts }
+
+      it { should_not contain_concat__fragment('nginx.conf_body_mail_header') }
+      it { should_not contain_concat__fragment('nginx.conf_body_mail_footer') }
+    end
   end
 
   describe 'on Debian with parameter: manage_repo' do
