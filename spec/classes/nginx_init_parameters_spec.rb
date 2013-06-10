@@ -185,12 +185,12 @@ describe 'nginx', :type => :class do
     end
   end
 
-  describe 'on Debian with parameter: manage_repo' do
-    let (:facts) { debian_facts }
-    let (:params) { { :manage_repo => '_VALUE_' } }
-
-    it { should create_class('nginx') }
-  end
+  #describe 'on Debian with parameter: manage_repo' do
+  #  let (:facts) { debian_facts }
+  #  let (:params) { { :manage_repo => '_VALUE_' } }
+  #
+  #  it { should create_class('nginx') }
+  #end
 
   describe 'on Debian with parameter: mime_types' do
     let (:facts) { debian_facts }
