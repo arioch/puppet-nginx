@@ -50,12 +50,15 @@ describe 'nginx::vhost', :type => :define do
     }
   end
 
-  #describe 'on Debian with parameter: listen' do
-  #  let (:facts) { debian_facts }
-  #  let (:title) { '_NAME_' }
-  #  let (:params) { { :listen => '80' } }
+  describe 'on Debian with parameter: listen' do
+    let (:facts) { debian_facts }
+    let (:title) { '_NAME_' }
+    let (:params) { { :listen => [ '_VALUE_' ] } }
 
-  #  it { should contain_file('/tmp/enabled/_NAME_.conf').with_content(/listen.*:80/) }
-  #end
+    it { should contain_file('/tmp/enabled/_NAME_.conf').with(
+        'content' => /listen _VALUE_;/
+      )
+    }
+  end
 end
 
