@@ -22,7 +22,10 @@ describe 'nginx::vhost', :type => :define do
     let (:title) { '_NAME_' }
     let (:params) { { :ensure => '_VALUE_' } }
 
-    it { should contain_file('/tmp/enabled/_NAME_.conf').with_ensure('_VALUE_') }
+    it { should contain_file('/tmp/enabled/_NAME_.conf').with(
+        'ensure' => '_VALUE_'
+      )
+    }
   end
 
   describe 'on Debian with parameter: server_name' do
@@ -30,7 +33,10 @@ describe 'nginx::vhost', :type => :define do
     let (:title) { '_NAME_' }
     let (:params) { { :server_name => '_NAME_' } }
 
-    it { should contain_file('/tmp/enabled/_NAME_.conf').with_content(/server_name.*_NAME_/) }
+    it { should contain_file('/tmp/enabled/_NAME_.conf').with(
+        'content' => /server_name.*_NAME_/
+      )
+    }
   end
 
   describe 'on Debian with parameter: config_path' do
@@ -38,7 +44,10 @@ describe 'nginx::vhost', :type => :define do
     let (:title) { '_NAME_' }
     let (:params) { { :config_path => '_VALUE_' } }
 
-    it { should contain_file('/tmp/enabled/_NAME_.conf').with_target('_VALUE_') }
+    it { should contain_file('/tmp/enabled/_NAME_.conf').with(
+        'target' => '_VALUE_'
+      )
+    }
   end
 
   #describe 'on Debian with parameter: listen' do

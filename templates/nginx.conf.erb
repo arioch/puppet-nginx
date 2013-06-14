@@ -1,7 +1,7 @@
-user              <%= scope.lookupvar('nginx::daemon_user') %>;
-worker_priority   <%= scope.lookupvar('nginx::worker_priority') %>;
-worker_processes  <%= scope.lookupvar('nginx::worker_processes') %>;
+user              <%= @daemon_user %>;
+worker_priority   <%= @worker_priority %>;
+worker_processes  <%= @worker_processes %>;
 
-error_log         <%= scope.lookupvar('nginx::logdir') %>/error.log;
-pid               <%= scope.lookupvar('nginx::pidfile') %>;
+error_log         <%= @logdir %>/error.log;
+pid               <%= @pidfile %>;
 

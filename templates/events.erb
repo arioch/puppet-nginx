@@ -1,4 +1,4 @@
-    use                <%= scope.lookupvar('nginx::event_model') %>;
-    worker_connections <%= scope.lookupvar('nginx::worker_connections') %>;
-    multi_accept       <%= scope.lookupvar('nginx::multi_accept') %>;
-    accept_mutex       <%= scope.lookupvar('nginx::accept_mutex') %>;
+    use                <%= @event_model %>;
+    worker_connections <%= @worker_connections %>;
+    multi_accept       <% if @multi_accept -%>on<% else -%>off<% end -%>;
+    accept_mutex       <% if @accept_mutex -%>on<% else -%>off<% end -%>;

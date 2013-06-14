@@ -1,6 +1,6 @@
     server {
-        listen   <%= scope.lookupvar('listen_address') -%>:<%= scope.lookupvar('_listen_port') -%>;
-        protocol <%= scope.lookupvar('protocol') -%>;
-        proxy    <%= scope.lookupvar('proxy') -%>;
+        listen   <%= @listen_address -%>:<%= @_listen_port -%>;
+        protocol <%= @protocol -%>;
+        proxy    <%= @proxy -%>;
     }
 

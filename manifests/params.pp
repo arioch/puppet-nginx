@@ -21,17 +21,17 @@ class nginx::params {
 
   # HTTP module
   $default_type      = 'application/octet-stream'
-  $gzip              = 'on'
+  $gzip              = true
   $gzip_comp_level   = '4'
   $gzip_disable      = 'MSIE [1-6]\.(?!.*SV1)'
   $gzip_proxied      = 'any'
-  $gzip_static       = 'on'
+  $gzip_static       = true
   $gzip_types        = 'text/plain text/css text/javascript application/json application/x-javascript'
   $keepalive_timeout = '65'
   $mime_types        = '/etc/nginx/mime.types'
-  $sendfile          = 'on'
-  $tcp_nodelay       = 'on'
-  $tcp_nopush        = 'on'
+  $sendfile          = true
+  $tcp_nodelay       = true
+  $tcp_nopush        = true
 
   $proxy_cache           = false
   $proxy_cache_dir       = '/cache'
@@ -44,8 +44,8 @@ class nginx::params {
   $server_names_hash_bucket_size = '64'
 
   # Events module
-  $accept_mutex     = 'off'
-  $multi_accept     = 'on'
+  $accept_mutex     = false
+  $multi_accept     = true
   $worker_processes = $::processorcount
 
   $event_model = $::kernel ? {
@@ -68,7 +68,7 @@ class nginx::params {
       $pkg_list            = 'nginx'
       $service_enable      = true
       $service_ensure      = 'running'
-      $service_hasrestart   = true
+      $service_hasrestart  = true
       $service_hasstatus   = true
       $service_name        = 'nginx'
       $vhostdir_enabled    = '/etc/nginx/conf.d'

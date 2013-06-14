@@ -1,7 +1,7 @@
 server {
-  <% listen.each do |port| %>listen <%= port %>;
+  <% @listen.each do |port| %>listen <%= @port %>;
   <% end %>
-  server_name <%= scope.lookupvar('server_name') -%>;
+  server_name <%= @server_name -%>;
 
   location / {
     # placeholder

@@ -3,8 +3,8 @@ server {
     location /nginx_status {
         stub_status on;
         access_log  off;
-        allow       <%= scope.lookupvar('nginx::status_allow') %>;
-        deny        <%= scope.lookupvar('nginx::status_deny') %>;
+        allow       <%= @status_allow %>;
+        deny        <%= @status_deny %>;
     }
 }
 

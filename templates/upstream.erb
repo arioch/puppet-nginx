@@ -1,6 +1,6 @@
-    upstream <%= scope.lookupvar('upstream_backend') -%> {
+    upstream <%= @upstream_backend -%> {
         <% if @ip_hash %>ip_hash;<% else %># ip_hash;<% end %>
-        <% upstream_nodes.each do |node| %>server <%= node %>;
+        <% @upstream_nodes.each do |node| %>server <%= @node %>;
         <% end %>
     }
 

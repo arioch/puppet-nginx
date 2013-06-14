@@ -1,34 +1,34 @@
 server {
   <% listen.each do |port| %>listen <%= port %>;
   <% end %>
-  server_name <%= scope.lookupvar('server_name') -%>;
+  server_name <%= @server_name -%>;
 
-  <% if @error_log -%>error_log  <%= scope.lookupvar('nginx::logdir') %>/<%= name %>_error.log;<% else %>#error_log<% end %>
-  <% if @access_log -%>access_log <%= scope.lookupvar('nginx::logdir') %>/<%= name %>_access.log;<% else %>#access_log<% end %>
+  <% if @error_log -%>error_log  <%= @logdir %>/<%= @name %>_error.log;<% else %>#error_log<% end %>
+  <% if @access_log -%>access_log <%= @logdir %>/<%= @name %>_access.log;<% else %>#access_log<% end %>
 
   <% if @proxy_cache_enable %>location <%= proxy_cache_location %> {
-    proxy_cache_valid <%= proxy_cache_valid %>;
-    expires           <%= proxy_cache_expires %>;
-    proxy_pass        <%= proxy_cache_pass %>;
-    <% if @proxy_cache %>proxy_cache       <%= proxy_cache %><% else %>#proxy_cache      staticfilecache<% end %>;
+    proxy_cache_valid <%= @proxy_cache_valid %>;
+    expires           <%= @proxy_cache_expires %>;
+    proxy_pass        <%= @proxy_cache_pass %>;
+    <% if @proxy_cache %>proxy_cache       <%= @proxy_cache %><% else %>#proxy_cache      staticfilecache<% end %>;
     proxy_set_header  Host $host;
     proxy_set_header  X-Real-IP $remote_addr;
     proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
   }<% end %>
 
   location / {
-    proxy_pass              <%= scope.lookupvar('proxy_pass') -%>;
+    proxy_pass              <%= @proxy_pass -%>;
     proxy_set_header        Host $host;
     proxy_set_header        X-Real-IP $remote_addr;
     proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_connect_timeout   <%= scope.lookupvar('proxy_connect_timeout') -%>;
-    proxy_send_timeout      <%= scope.lookupvar('proxy_send_timeout') -%>;
-    proxy_read_timeout      <%= scope.lookupvar('proxy_read_timeout') -%>;
-    proxy_buffers           <%= scope.lookupvar('proxy_buffers') -%>;
-    client_max_body_size    <%= scope.lookupvar('client_max_body_size') -%>;
-    client_body_buffer_size <%= scope.lookupvar('client_body_buffer_size') -%>;
+    proxy_connect_timeout   <%= @proxy_connect_timeout -%>;
+    proxy_send_timeout      <%= @proxy_send_timeout -%>;
+    proxy_read_timeout      <%= @proxy_read_timeout -%>;
+    proxy_buffers           <%= @proxy_buffers -%>;
+    client_max_body_size    <%= @client_max_body_size -%>;
+    client_body_buffer_size <%= @client_body_buffer_size -%>;
   <% if @proxy_ignore_headers %>
-    <% proxy_ignore_headers.each do |ignore_header| %>proxy_ignore_headers    <%= ignore_header %>;
+    <% @proxy_ignore_headers.each do |ignore_header| %>proxy_ignore_headers    <%= ignore_header %>;
     <% end -%>
   <% end -%>
 
