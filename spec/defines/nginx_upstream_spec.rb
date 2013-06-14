@@ -19,36 +19,90 @@ describe 'nginx::upstream', :type => :define do
     end
   end
 
-  #describe 'on Debian with parameter: ensure' do
-  #  let (:facts) { debian_facts }
-  #  let (:title) { '_NAME_' }
-  #  let (:params) { { :upstream_nodes => '_NODES_', :ensure => '_VALUE_' } }
-  #
-  #  it { should_not contain_concat__fragment('nginx.conf_body_http_upstream__NAME_') }
-  #end
+  describe 'on Debian with parameter: ensure' do
+    let (:facts) { debian_facts }
+    let (:title) { '_NAME_' }
+    let (:params) {
+      {
+        :upstream_nodes => [ '_NODES_' ],
+        :ensure => '_VALUE_'
+      }
+    }
 
-  #describe 'on Debian with parameter: ip_hash' do
-  #  let (:facts) { debian_facts }
-  #  let (:title) { '_NAME_' }
-  #  let (:params) { { :upstream_nodes => '_NODES_', :ip_hash => '_VALUE_' } }
-  #
-  #  it { should_not contain_concat__fragment('nginx.conf_body_http_upstream__NAME_') }
-  #end
+    it { should \
+      contain_concat__fragment('nginx.conf_body_http_upstream__NAME_').with(
+        'content' => /upstream _NAME_/
+      )
+    }
+  end
 
-  #describe 'on Debian with parameter: upstream_backend' do
-  #  let (:facts) { debian_facts }
-  #  let (:title) { '_NAME_' }
-  #  let (:params) { { :upstream_nodes => '_NODES_', :upstream_backend => '_VALUE_' } }
-  #
-  #  it { should_not contain_concat__fragment('nginx.conf_body_http_upstream__NAME_') }
-  #end
+  describe 'on Debian with parameter: ip_hash' do
+    let (:facts) { debian_facts }
+    let (:title) { '_NAME_' }
 
-  #describe 'on Debian with parameter: upstream_nodes' do
-  #  let (:facts) { debian_facts }
-  #  let (:title) { '_NAME_' }
-  #  let (:params) { { :upstream_nodes => '_NODES_', :upstream_backend => '_VALUE_' } }
-  #
-  #  it { should_not contain_concat__fragment('nginx.conf_body_http_upstream__NAME_') }
-  #end
+    context 'ip_hash => true' do
+      let (:params) {
+        {
+          :upstream_nodes => [ '_NODES_' ],
+          :ip_hash => true
+        }
+      }
+
+      it { should \
+        contain_concat__fragment('nginx.conf_body_http_upstream__NAME_').with(
+          'content' => / ip_hash;/
+        )
+      }
+    end
+
+    context 'ip_hash => false' do
+      let (:params) {
+        {
+          :upstream_nodes => [ '_NODES_' ],
+          :ip_hash => false
+        }
+      }
+
+      it { should \
+        contain_concat__fragment('nginx.conf_body_http_upstream__NAME_').with(
+          'content' => /# ip_hash;/
+        )
+      }
+    end
+  end
+
+  describe 'on Debian with parameter: upstream_backend' do
+    let (:facts) { debian_facts }
+    let (:title) { '_NAME_' }
+    let (:params) {
+      {
+        :upstream_nodes => [ '_NODES_' ],
+        :upstream_backend => '_VALUE_'
+      }
+    }
+
+    it { should \
+      contain_concat__fragment('nginx.conf_body_http_upstream__NAME_').with(
+        'content' => /upstream _VALUE_/
+      )
+    }
+  end
+
+  describe 'on Debian with parameter: upstream_nodes' do
+    let (:facts) { debian_facts }
+    let (:title) { '_NAME_' }
+    let (:params) {
+      {
+        :upstream_nodes => [ '_NODES_' ],
+        :upstream_backend => '_VALUE_'
+      }
+    }
+
+    it { should \
+      contain_concat__fragment('nginx.conf_body_http_upstream__NAME_').with(
+        'content' => /server _NODES_/
+      )
+    }
+  end
 end
 
