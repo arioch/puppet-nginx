@@ -57,5 +57,32 @@ class nginx (
   class { 'nginx::config': } ~>
   class { 'nginx::service': } ->
   Class [ 'nginx' ]
+
+  validate_bool($accept_mutex)
+  validate_bool($access_log)
+  validate_bool($gzip)
+  validate_bool($gzip_static)
+  validate_bool($http)
+  validate_bool($mail)
+  validate_bool($manage_repo)
+  validate_bool($multi_accept)
+  validate_bool($proxy_cache)
+  validate_bool($sendfile)
+  validate_bool($service_enable)
+  validate_bool($service_hasrestart)
+  validate_bool($service_hasstatus)
+  validate_bool($status_enable)
+  validate_bool($tcp_nodelay)
+  validate_bool($tcp_nopush)
+
+  validate_absolute_path($logdir)
+  validate_absolute_path($mime_types)
+  validate_absolute_path($pidfile)
+  validate_absolute_path($proxy_temp_path)
+  validate_absolute_path($vhostdir_enabled)
+
+  if $vhostdir_available {
+    validate_absolute_path($vhostdir_available)
+  }
 }
 
