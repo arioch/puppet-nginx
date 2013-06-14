@@ -82,14 +82,24 @@ describe 'nginx::proxy', :type => :define do
       it { should contain_file('/tmp/enabled/_NAME_') }
     end
 
-    #context 'enable => false' do
-    #  let (:facts) { debian_facts }
-    #  let (:title) { '_NAME_' }
-    #  let (:params) { { :proxy_pass => '_PASS_', :enable => false } }
+    context 'enable => false' do
+      let (:facts) { debian_facts }
+      let (:title) { '_NAME_' }
+      let (:params) {
+        {
+          :proxy_pass => '_PASS_',
+          :enable => false
+        }
+      }
 
-    #  it { should contain_file('/tmp/available/_NAME_') }
-    #  it { should_not contain_file('/tmp/enabled/_NAME_') }
-    #end
+      it { should \
+        contain_file('/tmp/available/_NAME_').with_ensure('present')
+      }
+
+      it { should_not \
+        contain_file('/tmp/enabled/_NAME_').with_ensure('present')
+      }
+    end
   end
 
   describe 'on Debian with parameter: ensure' do
