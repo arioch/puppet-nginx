@@ -15,7 +15,7 @@
 # $client_max_body_size::     Client max body size.
 #                             Default: 8m
 #
-# $enable::                   Default: false
+# $enable::                   Default: true
 #
 # $error_log::                Enable/disable error logging.
 #                             Default: true
@@ -83,7 +83,7 @@ define nginx::proxy (
   $access_log              = true,
   $client_body_buffer_size = '128k',
   $client_max_body_size    = '8m',
-  $enable                  = false,
+  $enable                  = true,
   $error_log               = true,
   $listen                  = [ '80', '443' ],
   $proxy_buffers           = '4 32k',
