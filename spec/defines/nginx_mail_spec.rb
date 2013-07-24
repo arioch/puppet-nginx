@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe 'nginx::mail', :type => :define do
+  let (:facts) { debian_facts }
   let (:pre_condition) { '$concat_basedir = "/tmp"' }
   let (:pre_condition) {
     'class { "nginx":
@@ -10,8 +11,7 @@ describe 'nginx::mail', :type => :define do
     }'
   }
 
-  describe 'on Debian without parameters' do
-    let (:facts) { debian_facts }
+  describe 'without parameters' do
     let (:title) { '_NAME_' }
 
     it do
@@ -19,8 +19,7 @@ describe 'nginx::mail', :type => :define do
     end
   end
 
-  describe 'on Debian with parameter: server_name' do
-    let (:facts) { debian_facts }
+  describe 'with parameter: server_name' do
     let (:title) { '_NAME_' }
     let (:params) {
       {
@@ -32,8 +31,7 @@ describe 'nginx::mail', :type => :define do
     it { should contain_concat__fragment('nginx.conf_body_mail__NAME_') }
   end
 
-  describe 'on Debian with parameter: ensure' do
-    let (:facts) { debian_facts }
+  describe 'with parameter: ensure' do
     let (:title) { '_NAME_' }
     let (:params) {
       {
@@ -49,8 +47,7 @@ describe 'nginx::mail', :type => :define do
     }
   end
 
-  describe 'on Debian with parameter: listen_address' do
-    let (:facts) { debian_facts }
+  describe 'with parameter: listen_address' do
     let (:title) { '_NAME_' }
     let (:params) {
       {
@@ -66,8 +63,7 @@ describe 'nginx::mail', :type => :define do
     }
   end
 
-  describe 'on Debian with parameter: listen_port' do
-    let (:facts) { debian_facts }
+  describe 'with parameter: listen_port' do
     let (:title) { '_NAME_' }
     let (:params) {
       {
@@ -83,8 +79,7 @@ describe 'nginx::mail', :type => :define do
     }
   end
 
-  describe 'on Debian with parameter: protocol' do
-    let (:facts) { debian_facts }
+  describe 'with parameter: protocol' do
     let (:title) { '_NAME_' }
 
     context 'imap' do
@@ -163,8 +158,7 @@ describe 'nginx::mail', :type => :define do
     end
   end
 
-  describe 'on Debian with parameter: proxy' do
-    let (:facts) { debian_facts }
+  describe 'with parameter: proxy' do
     let (:title) { '_NAME_' }
     let (:params) {
       {

@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe 'nginx::proxy', :type => :define do
+  let (:facts) { debian_facts }
   let (:pre_condition) { '$concat_basedir = "/tmp"' }
   let (:pre_condition) {
     'class { "nginx":
@@ -10,8 +11,7 @@ describe 'nginx::proxy', :type => :define do
     }'
   }
 
-  describe 'on Debian without parameters' do
-    let (:facts) { debian_facts }
+  describe 'without parameters' do
     let (:title) { '_NAME_' }
 
     it do
@@ -19,8 +19,7 @@ describe 'nginx::proxy', :type => :define do
     end
   end
 
-  describe 'on Debian with parameter: access_log' do
-    let (:facts) { debian_facts }
+  describe 'with parameter: access_log' do
     let (:title) { '_NAME_' }
     let (:params) {
       {
@@ -35,8 +34,7 @@ describe 'nginx::proxy', :type => :define do
     }
   end
 
-  describe 'on Debian with parameter: client_body_buffer_size' do
-    let (:facts) { debian_facts }
+  describe 'with parameter: client_body_buffer_size' do
     let (:title) { '_NAME_' }
     let (:params) {
       {
@@ -51,8 +49,7 @@ describe 'nginx::proxy', :type => :define do
     }
   end
 
-  describe 'on Debian with parameter: client_max_body_size' do
-    let (:facts) { debian_facts }
+  describe 'with parameter: client_max_body_size' do
     let (:title) { '_NAME_' }
     let (:params) {
       {
@@ -67,7 +64,7 @@ describe 'nginx::proxy', :type => :define do
     }
   end
 
-  describe 'on Debian with parameter: enable' do
+  describe 'with parameter: enable' do
     context 'enable => true' do
       let (:facts) { debian_facts }
       let (:title) { '_NAME_' }
@@ -102,8 +99,7 @@ describe 'nginx::proxy', :type => :define do
     end
   end
 
-  describe 'on Debian with parameter: ensure' do
-    let (:facts) { debian_facts }
+  describe 'with parameter: ensure' do
     let (:title) { '_NAME_' }
     let (:params) {
       {
@@ -115,8 +111,7 @@ describe 'nginx::proxy', :type => :define do
     it { should contain_file('/tmp/available/_NAME_').with_ensure('_NAME_') }
   end
 
-  describe 'on Debian with parameter: error_log' do
-    let (:facts) { debian_facts }
+  describe 'with parameter: error_log' do
     let (:title) { '_NAME_' }
     let (:params) {
       {
@@ -131,7 +126,7 @@ describe 'nginx::proxy', :type => :define do
     }
   end
 
-  #describe 'on Debian with parameter: listen' do
+  #describe 'with parameter: listen' do
   #  let (:facts) { debian_facts }
   #  let (:title) { '_NAME_' }
   #  let (:params) { { :proxy_pass => '_PASS_', :listen => '_NAME_' } }
@@ -139,8 +134,7 @@ describe 'nginx::proxy', :type => :define do
   #  it { should contain_file('/tmp/available/_NAME_').with_content(/listen.*_NAME_/) }
   #end
 
-  describe 'on Debian with parameter: log_dir' do
-    let (:facts) { debian_facts }
+  describe 'with parameter: log_dir' do
     let (:title) { '_NAME_' }
     let (:params) {
       {
@@ -155,8 +149,7 @@ describe 'nginx::proxy', :type => :define do
     }
   end
 
-  describe 'on Debian with parameter: proxy_buffers' do
-    let (:facts) { debian_facts }
+  describe 'with parameter: proxy_buffers' do
     let (:title) { '_NAME_' }
     let (:params) {
       {
@@ -171,8 +164,7 @@ describe 'nginx::proxy', :type => :define do
     }
   end
 
-  describe 'on Debian with parameter: proxy_cache' do
-    let (:facts) { debian_facts }
+  describe 'with parameter: proxy_cache' do
     let (:title) { '_NAME_' }
     let (:params) {
       {
@@ -188,8 +180,7 @@ describe 'nginx::proxy', :type => :define do
     }
   end
 
-  describe 'on Debian with parameter: proxy_cache_enable' do
-    let (:facts) { debian_facts }
+  describe 'with parameter: proxy_cache_enable' do
     let (:title) { '_NAME_' }
     let (:params) {
       {
@@ -204,8 +195,7 @@ describe 'nginx::proxy', :type => :define do
     }
   end
 
-  describe 'on Debian with parameter: proxy_cache_expires' do
-    let (:facts) { debian_facts }
+  describe 'with parameter: proxy_cache_expires' do
     let (:title) { '_NAME_' }
     let (:params) {
       {
@@ -221,8 +211,7 @@ describe 'nginx::proxy', :type => :define do
     }
   end
 
-  describe 'on Debian with parameter: proxy_cache_location' do
-    let (:facts) { debian_facts }
+  describe 'with parameter: proxy_cache_location' do
     let (:title) { '_NAME_' }
     let (:params) {
       {
@@ -238,8 +227,7 @@ describe 'nginx::proxy', :type => :define do
     }
   end
 
-  describe 'on Debian with parameter: proxy_cache_pass' do
-    let (:facts) { debian_facts }
+  describe 'with parameter: proxy_cache_pass' do
     let (:title) { '_NAME_' }
     let (:params) {
       {
@@ -255,7 +243,7 @@ describe 'nginx::proxy', :type => :define do
     }
   end
 
-  describe 'on Debian with parameter: proxy_cache_valid' do
+  describe 'with parameter: proxy_cache_valid' do
     context 'proxy_cache_enable => true' do
       let (:facts) { debian_facts }
       let (:title) { '_NAME_' }
@@ -290,8 +278,7 @@ describe 'nginx::proxy', :type => :define do
     end
   end
 
-  describe 'on Debian with parameter: proxy_connect_timeout' do
-    let (:facts) { debian_facts }
+  describe 'with parameter: proxy_connect_timeout' do
     let (:title) { '_NAME_' }
     let (:params) {
       {
@@ -307,7 +294,7 @@ describe 'nginx::proxy', :type => :define do
     }
   end
 
-  #describe 'on Debian with parameter: proxy_ignore_headers' do
+  #describe 'with parameter: proxy_ignore_headers' do
   #  let (:facts) { debian_facts }
   #  let (:title) { '_NAME_' }
   #  let (:params) { { :proxy_pass => '_PASS_', :proxy_cache_enable => true, :proxy_ignore_headers => '_NAME_' } }
@@ -315,8 +302,7 @@ describe 'nginx::proxy', :type => :define do
   #  it { should contain_file('/tmp/available/_NAME_').with_content(/proxy_ignore_headers.*_NAME_/) }
   #end
 
-  describe 'on Debian with parameter: proxy_pass' do
-    let (:facts) { debian_facts }
+  describe 'with parameter: proxy_pass' do
     let (:title) { '_NAME_' }
     let (:params) {
       {
@@ -332,8 +318,7 @@ describe 'nginx::proxy', :type => :define do
     }
   end
 
-  describe 'on Debian with parameter: proxy_read_timeout' do
-    let (:facts) { debian_facts }
+  describe 'with parameter: proxy_read_timeout' do
     let (:title) { '_NAME_' }
     let (:params) {
       {
@@ -349,8 +334,7 @@ describe 'nginx::proxy', :type => :define do
     }
   end
 
-  describe 'on Debian with parameter: proxy_send_timeout' do
-    let (:facts) { debian_facts }
+  describe 'with parameter: proxy_send_timeout' do
     let (:title) { '_NAME_' }
     let (:params) {
       {
@@ -366,8 +350,7 @@ describe 'nginx::proxy', :type => :define do
     }
   end
 
-  describe 'on Debian with parameter: server_name' do
-    let (:facts) { debian_facts }
+  describe 'with parameter: server_name' do
     let (:title) { '_NAME_' }
     let (:params) {
       {

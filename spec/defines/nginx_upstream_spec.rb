@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe 'nginx::upstream', :type => :define do
+  let (:facts) { debian_facts }
   let (:pre_condition) { '$concat_basedir = "/tmp"' }
   let (:pre_condition) {
     'class { "nginx":
@@ -10,8 +11,7 @@ describe 'nginx::upstream', :type => :define do
     }'
   }
 
-  describe 'on Debian without parameters' do
-    let (:facts) { debian_facts }
+  describe 'without parameters' do
     let (:title) { '_NAME_' }
 
     it do
@@ -19,8 +19,7 @@ describe 'nginx::upstream', :type => :define do
     end
   end
 
-  describe 'on Debian with parameter: ensure' do
-    let (:facts) { debian_facts }
+  describe 'with parameter: ensure' do
     let (:title) { '_NAME_' }
     let (:params) {
       {
@@ -36,8 +35,7 @@ describe 'nginx::upstream', :type => :define do
     }
   end
 
-  describe 'on Debian with parameter: ip_hash' do
-    let (:facts) { debian_facts }
+  describe 'with parameter: ip_hash' do
     let (:title) { '_NAME_' }
 
     context 'ip_hash => true' do
@@ -71,8 +69,7 @@ describe 'nginx::upstream', :type => :define do
     end
   end
 
-  describe 'on Debian with parameter: upstream_backend' do
-    let (:facts) { debian_facts }
+  describe 'with parameter: upstream_backend' do
     let (:title) { '_NAME_' }
     let (:params) {
       {
@@ -88,8 +85,7 @@ describe 'nginx::upstream', :type => :define do
     }
   end
 
-  describe 'on Debian with parameter: upstream_nodes' do
-    let (:facts) { debian_facts }
+  describe 'with parameter: upstream_nodes' do
     let (:title) { '_NAME_' }
     let (:params) {
       {

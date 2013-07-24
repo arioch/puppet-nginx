@@ -1,12 +1,11 @@
 require 'spec_helper'
 
 describe 'nginx', :type => :class do
-  let(:pre_condition) { '$concat_basedir = "/tmp"' }
+  let (:facts) { debian_facts }
+  let (:pre_condition) { '$concat_basedir = "/tmp"' }
   let (:params) { { :config_dir => '/etc/nginx' } }
 
-  describe 'on Debian without parameters' do
-    let (:facts) { debian_facts }
-
+  describe 'without parameters' do
     it { should create_class('nginx') }
     it { should include_class('nginx::install') }
     it { should include_class('nginx::config') }
