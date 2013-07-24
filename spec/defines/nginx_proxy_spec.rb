@@ -139,6 +139,22 @@ describe 'nginx::proxy', :type => :define do
   #  it { should contain_file('/tmp/available/_NAME_').with_content(/listen.*_NAME_/) }
   #end
 
+  describe 'on Debian with parameter: log_dir' do
+    let (:facts) { debian_facts }
+    let (:title) { '_NAME_' }
+    let (:params) {
+      {
+        :proxy_pass => '_PASS_',
+        :log_dir => '_VALUE_'
+      }
+    }
+
+    it { should contain_file('/tmp/available/_NAME_').with(
+        'content' => /error_log.*\_VALUE_\/_NAME_/
+      )
+    }
+  end
+
   describe 'on Debian with parameter: proxy_buffers' do
     let (:facts) { debian_facts }
     let (:title) { '_NAME_' }

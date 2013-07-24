@@ -23,6 +23,9 @@
 # $listen::                   Listen ports, multiple entries accepted in an array.
 #                             Default: [ 80, 443 ]
 #
+# $log_dir::                  Directory containing log files.
+#                             Default: /var/log/nginx
+#
 # $proxy_buffers::            This directive sets the number and the size of
 #                             buffers, into which will be read the answer,
 #                             obtained from the proxied server.
@@ -78,14 +81,14 @@
 #
 
 define nginx::proxy (
-  $proxy_pass,
-  $ensure                  = present,
   $access_log              = true,
   $client_body_buffer_size = '128k',
   $client_max_body_size    = '8m',
   $enable                  = true,
+  $ensure                  = present,
   $error_log               = true,
   $listen                  = [ '80', '443' ],
+  $log_dir                 = $::nginx::logdir,
   $proxy_buffers           = '4 32k',
   $proxy_cache             = undef,
   $proxy_cache_enable      = false,
@@ -95,6 +98,7 @@ define nginx::proxy (
   $proxy_cache_valid       = '200 120m',
   $proxy_connect_timeout   = '60',
   $proxy_ignore_headers    = undef,
+  $proxy_pass,
   $proxy_read_timeout      = '100',
   $proxy_send_timeout      = '100',
   $server_name             = $name,

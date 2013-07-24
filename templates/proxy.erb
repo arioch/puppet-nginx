@@ -3,8 +3,8 @@ server {
   <% end %>
   server_name <%= @server_name -%>;
 
-  <% if @error_log -%>error_log  <%= @logdir %>/<%= @name %>_error.log;<% else %>#error_log<% end %>
-  <% if @access_log -%>access_log <%= @logdir %>/<%= @name %>_access.log;<% else %>#access_log<% end %>
+  <% if @error_log -%>error_log  <%= @log_dir %>/<%= @name %>_error.log;<% else %>#error_log<% end %>
+  <% if @access_log -%>access_log <%= @log_dir %>/<%= @name %>_access.log;<% else %>#access_log<% end %>
 
   <% if @proxy_cache_enable %>location <%= proxy_cache_location %> {
     proxy_cache_valid <%= @proxy_cache_valid %>;
