@@ -88,6 +88,7 @@ define nginx::proxy (
   $ensure                  = present,
   $error_log               = true,
   $listen                  = [ '80', '443' ],
+  $location                = "/",
   $log_dir                 = $::nginx::logdir,
   $proxy_buffers           = '4 32k',
   $proxy_cache             = undef,
