@@ -134,6 +134,21 @@ describe 'nginx::proxy', :type => :define do
   #  it { should contain_file('/tmp/available/_NAME_').with_content(/listen.*_NAME_/) }
   #end
 
+  describe 'with parameter: location' do
+    let (:title) { '_NAME_' }
+    let (:params) {
+      {
+        :proxy_pass => '_PASS_',
+        :location => '_VALUE_'
+      }
+    }
+
+    it { should contain_file('/tmp/available/_NAME_').with(
+        'content' => /location _VALUE_/
+      )
+    }
+  end
+
   describe 'with parameter: log_dir' do
     let (:title) { '_NAME_' }
     let (:params) {
