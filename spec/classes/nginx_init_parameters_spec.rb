@@ -484,11 +484,11 @@ describe 'nginx', :type => :class do
         {
           :status_allow => '127.0.0.1',
           :status_enable => true,
-          :vhostdir_enabled => '/tmp'
+          :config_dir => '/tmp'
         }
       }
 
-      it { should contain_file('/tmp/status.conf').with_ensure('link') }
+      it { should contain_file('/tmp/conf.d/status.conf').with_ensure('present') }
     end
 
     context 'status_enable => false' do
@@ -497,11 +497,11 @@ describe 'nginx', :type => :class do
         {
           :status_allow => '127.0.0.1',
           :status_enable => false,
-          :vhostdir_enabled => '/tmp'
+          :config_dir => '/tmp'
         }
       }
 
-      it { should_not contain_file('/tmp/status.conf').with_ensure('link') }
+      it { should_not contain_file('/tmp/conf.d/status.conf').with_ensure('present') }
     end
   end
 
@@ -512,11 +512,11 @@ describe 'nginx', :type => :class do
         {
           :status_deny => '_VALUE_',
           :status_enable => true,
-          :vhostdir_enabled => '/tmp'
+          :config_dir => '/tmp'
         }
       }
 
-      it { should contain_file('/tmp/status.conf').with_ensure('link') }
+      it { should contain_file('/tmp/conf.d/status.conf').with_ensure('present') }
     end
 
     context 'status_enable => false' do
@@ -525,11 +525,11 @@ describe 'nginx', :type => :class do
         {
           :status_deny => '_VALUE_',
           :status_enable => false,
-          :vhostdir_enabled => '/tmp'
+          :config_dir => '/tmp'
         }
       }
 
-      it { should_not contain_file('/tmp/status.conf').with_ensure('link') }
+      it { should_not contain_file('/tmp/conf.d/status.conf').with_ensure('present') }
     end
   end
 
@@ -540,11 +540,11 @@ describe 'nginx', :type => :class do
         {
           :status_enable => '_VALUE_',
           :status_enable => true,
-          :vhostdir_enabled => '/tmp'
+          :config_dir => '/tmp'
         }
       }
 
-      it { should contain_file('/tmp/status.conf').with_ensure('link') }
+      it { should contain_file('/tmp/conf.d/status.conf').with_ensure('present') }
     end
 
     context 'status_enable => false' do
@@ -553,11 +553,11 @@ describe 'nginx', :type => :class do
         {
           :status_enable => '_VALUE_',
           :status_enable => false,
-          :vhostdir_enabled => '/tmp'
+          :config_dir => '/tmp'
         }
       }
 
-      it { should_not contain_file('/tmp/status.conf').with_ensure('link') }
+      it { should_not contain_file('/tmp/conf.d/status.conf').with_ensure('present') }
     end
   end
 
