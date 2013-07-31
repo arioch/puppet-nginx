@@ -12,17 +12,17 @@ class nginx::config {
     mode   => $nginx::config_dir_mode,
   }
 
+  if $nginx::status_enable {
+    file { "${::nginx::config_dir}/conf.d/status.conf":
+      ensure  => present,
+      content => template('nginx/status.erb'),
+    }
+  }
+
   case $::operatingsystem {
     'RedHat', 'CentOS': {
       file { $::nginx::vhostdir_enabled:
         ensure => directory;
-      }
-
-      if $nginx::status_enable {
-        file { "${::nginx::vhostdir_enabled}/status.conf":
-          ensure  => present,
-          content => template('nginx/status.erb'),
-        }
       }
     }
 
@@ -33,18 +33,6 @@ class nginx::config {
 
         $::nginx::vhostdir_available:
           ensure => directory;
-      }
-
-      if $nginx::status_enable {
-        file {
-          "${::nginx::vhostdir_available}/status.conf":
-            ensure  => present,
-            content => template('nginx/status.erb');
-
-          "${::nginx::vhostdir_enabled}/status.conf":
-            ensure => link,
-            target => "${::nginx::vhostdir_available}/status.conf";
-        }
       }
     }
 
