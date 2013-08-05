@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe 'nginx::proxy', :type => :define do
   let (:facts) { debian_facts }
-  let (:pre_condition) { '$concat_basedir = "/tmp"' }
   let (:pre_condition) {
-    'class { "nginx":
+    '$concat_basedir = "/tmp"
+    class { "nginx":
       http => true,
       vhostdir_available => "/tmp/available",
       vhostdir_enabled => "/tmp/enabled",

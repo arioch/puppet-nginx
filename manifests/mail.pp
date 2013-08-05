@@ -64,7 +64,6 @@ define nginx::mail (
   }
 
   concat::fragment { "nginx.conf_body_mail_${name}":
-    ensure  => $ensure,
     target  => "${nginx::config_dir}/nginx.conf",
     content => template('nginx/mail.erb'),
     order   => 18,

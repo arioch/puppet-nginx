@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe 'nginx::mail', :type => :define do
   let (:facts) { debian_facts }
-  let (:pre_condition) { '$concat_basedir = "/tmp"' }
   let (:pre_condition) {
-    'class { "nginx":
+    '$concat_basedir = "/tmp"
+    class { "nginx":
       mail => true,
       vhostdir_available => "/tmp/available",
       vhostdir_enabled => "/tmp/enabled",
@@ -41,10 +41,7 @@ describe 'nginx::mail', :type => :define do
       }
     }
 
-    it { should contain_concat__fragment('nginx.conf_body_mail__NAME_').with(
-        'ensure' => '_VALUE_'
-      )
-    }
+    it { should contain_concat__fragment('nginx.conf_body_mail__NAME_') }
   end
 
   describe 'with parameter: listen_address' do

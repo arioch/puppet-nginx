@@ -198,10 +198,10 @@ describe 'nginx', :type => :class do
   end
 
   describe 'with parameter: logdir' do
-    let (:params) { { :logdir => '/tmp' } }
+    let (:params) { { :logdir => '/var/log/nginx' } }
 
     it { should contain_concat__fragment('nginx.conf_body_http_content').with(
-        'content' => /\/tmp.*;/
+        'content' => /\/var\/log\/nginx.*;/
       )
     }
   end
@@ -228,10 +228,10 @@ describe 'nginx', :type => :class do
   #end
 
   describe 'with parameter: mime_types' do
-    let (:params) { { :mime_types => '/tmp' } }
+    let (:params) { { :mime_types => '/mime' } }
 
     it { should contain_concat__fragment('nginx.conf_body_http_content').with(
-        'content' => /\/tmp;/
+        'content' => /\/mime;/
       )
     }
   end
@@ -246,10 +246,10 @@ describe 'nginx', :type => :class do
   end
 
   describe 'with parameter: pidfile' do
-    let (:params) { { :pidfile => '/tmp' } }
+    let (:params) { { :pidfile => '/pid' } }
 
     it { should contain_concat__fragment('nginx.conf_header').with(
-        'content' => /\/tmp/
+        'content' => /\/pid/
       )
     }
   end
@@ -422,7 +422,7 @@ describe 'nginx', :type => :class do
     let (:params) {
       {
         :proxy_cache => true,
-        :proxy_temp_path => '/tmp'
+        :proxy_temp_path => '/tmp/proxy'
       }
     }
 
@@ -484,11 +484,11 @@ describe 'nginx', :type => :class do
         {
           :status_allow => '127.0.0.1',
           :status_enable => true,
-          :config_dir => '/tmp'
+          :config_dir => '/etc/nginx'
         }
       }
 
-      it { should contain_file('/tmp/conf.d/status.conf').with_ensure('present') }
+      it { should contain_file('/etc/nginx/conf.d/status.conf').with_ensure('present') }
     end
 
     context 'status_enable => false' do
@@ -497,11 +497,11 @@ describe 'nginx', :type => :class do
         {
           :status_allow => '127.0.0.1',
           :status_enable => false,
-          :config_dir => '/tmp'
+          :config_dir => '/etc/nginx'
         }
       }
 
-      it { should_not contain_file('/tmp/conf.d/status.conf').with_ensure('present') }
+      it { should_not contain_file('/etc/nginx/conf.d/status.conf').with_ensure('present') }
     end
   end
 
@@ -512,11 +512,11 @@ describe 'nginx', :type => :class do
         {
           :status_deny => '_VALUE_',
           :status_enable => true,
-          :config_dir => '/tmp'
+          :config_dir => '/etc/nginx'
         }
       }
 
-      it { should contain_file('/tmp/conf.d/status.conf').with_ensure('present') }
+      it { should contain_file('/etc/nginx/conf.d/status.conf').with_ensure('present') }
     end
 
     context 'status_enable => false' do
@@ -525,11 +525,11 @@ describe 'nginx', :type => :class do
         {
           :status_deny => '_VALUE_',
           :status_enable => false,
-          :config_dir => '/tmp'
+          :config_dir => '/etc/nginx'
         }
       }
 
-      it { should_not contain_file('/tmp/conf.d/status.conf').with_ensure('present') }
+      it { should_not contain_file('/etc/nginx/conf.d/status.conf').with_ensure('present') }
     end
   end
 
@@ -540,11 +540,11 @@ describe 'nginx', :type => :class do
         {
           :status_enable => '_VALUE_',
           :status_enable => true,
-          :config_dir => '/tmp'
+          :config_dir => '/etc/nginx'
         }
       }
 
-      it { should contain_file('/tmp/conf.d/status.conf').with_ensure('present') }
+      it { should contain_file('/etc/nginx/conf.d/status.conf').with_ensure('present') }
     end
 
     context 'status_enable => false' do
@@ -553,11 +553,11 @@ describe 'nginx', :type => :class do
         {
           :status_enable => '_VALUE_',
           :status_enable => false,
-          :config_dir => '/tmp'
+          :config_dir => '/etc/nginx'
         }
       }
 
-      it { should_not contain_file('/tmp/conf.d/status.conf').with_ensure('present') }
+      it { should_not contain_file('/etc/nginx/conf.d/status.conf').with_ensure('present') }
     end
   end
 
@@ -580,15 +580,15 @@ describe 'nginx', :type => :class do
   end
 
   describe 'with parameter: vhostdir_available' do
-    let (:params) { { :vhostdir_available => '/tmp' } }
+    let (:params) { { :vhostdir_available => '/etc/nginx/vhosts-available' } }
 
-    it { should contain_file('/tmp').with_ensure('directory') }
+    it { should contain_file('/etc/nginx/vhosts-available').with_ensure('directory') }
   end
 
   describe 'with parameter: vhostdir_enabled' do
-    let (:params) { { :vhostdir_enabled => '/tmp' } }
+    let (:params) { { :vhostdir_enabled => '/etc/nginx/vhosts-enabled' } }
 
-    it { should contain_file('/tmp').with_ensure('directory') }
+    it { should contain_file('/etc/nginx/vhosts-enabled').with_ensure('directory') }
   end
 
   describe 'with parameter: worker_connections' do

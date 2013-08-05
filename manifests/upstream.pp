@@ -12,7 +12,6 @@ define nginx::upstream (
   }
 
   concat::fragment { "nginx.conf_body_http_upstream_${name}":
-    ensure  => $ensure,
     target  => "${nginx::config_dir}/nginx.conf",
     content => template('nginx/upstream.erb'),
     order   => 14,
