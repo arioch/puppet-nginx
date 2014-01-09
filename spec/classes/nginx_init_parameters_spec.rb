@@ -36,26 +36,26 @@ describe 'nginx', :type => :class do
   end
 
   describe 'with parameter: config_dir' do
-    let (:params) { { :config_dir => '_VALUE_' } }
+    let (:params) { { :config_dir => '/config/dir' } }
 
-    it { should contain_file('_VALUE_').with_ensure('directory') }
+    it { should contain_file('/config/dir').with_ensure('directory') }
   end
 
   describe 'with parameter: config_dir_mode' do
     let (:params) {
       {
-        :config_dir => '_VALUE_',
-        :config_dir_mode => '_VALUE_'
+        :config_dir => '/config/dir',
+        :config_dir_mode => '0777'
       }
     }
 
-    it { should contain_file('_VALUE_').with_mode('_VALUE_') }
+    it { should contain_file('/config/dir').with_mode('0777') }
   end
 
   describe 'with parameter: config_file_mode' do
-    let (:params) { { :config_file_mode => '_VALUE_' } }
+    let (:params) { { :config_file_mode => '0777' } }
 
-    it { should contain_file('/etc/nginx/nginx.conf').with_mode('_VALUE_') }
+    it { should contain_file('/etc/nginx/nginx.conf').with_mode('0777') }
   end
 
   describe 'with parameter: config_group' do
