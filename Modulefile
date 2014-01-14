@@ -1,5 +1,5 @@
 name          'arioch-nginx'
-version       '0.1.1'
+version       '0.1.2'
 author        'Tom De Vylder'
 license       'Apache License, Version 2.0'
 summary       'NGINX module'
