@@ -81,6 +81,7 @@
 #
 
 define nginx::proxy (
+  $proxy_pass,
   $access_log              = true,
   $client_body_buffer_size = '128k',
   $client_max_body_size    = '8m',
@@ -88,7 +89,7 @@ define nginx::proxy (
   $ensure                  = present,
   $error_log               = true,
   $listen                  = [ '80', '443' ],
-  $location                = "/",
+  $location                = '/',
   $log_dir                 = $::nginx::logdir,
   $proxy_buffers           = '4 32k',
   $proxy_cache             = undef,
@@ -99,7 +100,6 @@ define nginx::proxy (
   $proxy_cache_valid       = '200 120m',
   $proxy_connect_timeout   = '60',
   $proxy_ignore_headers    = undef,
-  $proxy_pass,
   $proxy_read_timeout      = '100',
   $proxy_send_timeout      = '100',
   $server_name             = $name,
